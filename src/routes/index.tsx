@@ -54,7 +54,9 @@ function IndexComponent() {
 
 									const ydoc = new Y.Doc()
 									const provider = new HocuspocusProvider({
-										url: 'ws://localhost:3000/collab/example-document',
+										url: import.meta.env.PROD
+											? 'wss://abc-music.fly.dev//collab/example-document'
+											: 'ws://localhost:3000/collab/example-document',
 										name: 'example-document',
 										document: ydoc,
 										onConnect() {
