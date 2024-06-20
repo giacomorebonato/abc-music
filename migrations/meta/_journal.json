@@ -29,6 +29,20 @@
       "when": 1704985069025,
       "tag": "0003_numerous_namor",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1718884273894,
+      "tag": "0004_condemned_vampiro",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1718884356952,
+      "tag": "0005_lovely_colossus",
+      "breakpoints": true
     }
   ]
 }

@@ -20,8 +20,9 @@ let Devtools: React.FC = () => null
 
 export function Layout({
 	children,
+	empty,
 	sidebar,
-}: { children: React.ReactNode; sidebar?: React.ReactNode }) {
+}: { children: React.ReactNode; sidebar?: React.ReactNode; empty: boolean }) {
 	const dialogRef = useRef<HTMLDialogElement | null>(null)
 	const utils = trpcClient.useUtils()
 	const profile = trpcClient.auth.profile.useQuery()
@@ -52,6 +53,10 @@ export function Layout({
 			})
 		}
 	})
+
+	if (empty) {
+		return <>{children}</>
+	}
 
 	return (
 		<>

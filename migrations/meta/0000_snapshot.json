@@ -1,8 +1,6 @@
 {
-  "version": "5",
+  "version": "6",
   "dialect": "sqlite",
-  "id": "5558bfaa-4924-4a3b-abd7-627003495d2e",
-  "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "collaboration": {
       "name": "collaboration",
@@ -163,8 +161,9 @@
   },
   "enums": {},
   "_meta": {
-    "schemas": {},
     "tables": {},
     "columns": {}
-  }
+  },
+  "id": "5558bfaa-4924-4a3b-abd7-627003495d2e",
+  "prevId": "00000000-0000-0000-0000-000000000000"
 }

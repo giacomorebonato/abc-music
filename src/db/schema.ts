@@ -1,2 +1,2 @@
-export { noteTable as noteSchema } from '#/db/note-table'
+export { collabTable as collabSchema } from '#/db/collab-table'
 export { userTable as userSchema } from '#/db/user-table'
