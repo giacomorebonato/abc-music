@@ -26,7 +26,7 @@ export const collabApi = (
 	const hocusPocusServer = HocusPocusServer.configure({
 		extensions: [
 			new Database({
-				async fetch(data) {
+				async fetch(data): Promise<Uint8Array> {
 					const file = await db
 						.select()
 						.from(collabSchema)

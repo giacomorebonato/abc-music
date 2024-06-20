@@ -37,7 +37,9 @@ function IndexComponent() {
 							width='100%'
 							theme='vs-dark'
 							onMount={async (editor) => {
-								const name = prompt('Write your nickname')
+								const name = localStorage.name ?? prompt('Write your nickname')
+
+								localStorage.name = name
 								const { MonacoBinding } = await import('y-monaco')
 								if (sectionRef.current) {
 									abc.renderAbc(sectionRef.current, editor.getValue())
