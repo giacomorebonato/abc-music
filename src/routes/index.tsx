@@ -2,7 +2,6 @@ import Editor from '@monaco-editor/react'
 import { createFileRoute } from '@tanstack/react-router'
 import { Helmet } from 'react-helmet-async'
 import { Layout } from '#/browser/layout'
-import { SideMenu } from '#/browser/side-menu'
 import 'abcjs/abcjs-audio.css'
 import { HocuspocusProvider } from '@hocuspocus/provider'
 import * as abc from 'abcjs'
@@ -36,7 +35,7 @@ function IndexComponent() {
 	}, [])
 
 	return (
-		<Layout sidebar={<SideMenu withBookmarks />} empty>
+		<Layout empty>
 			<div className='flex flex-col md:flex-row'>
 				<Helmet>
 					<title>abc-music</title>
