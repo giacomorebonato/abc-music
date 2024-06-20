@@ -7,11 +7,18 @@ import 'abcjs/abcjs-audio.css'
 import { HocuspocusProvider } from '@hocuspocus/provider'
 import * as abc from 'abcjs'
 import { createRef, useEffect, useState } from 'react'
+import type { MonacoBinding } from 'y-monaco'
 import * as Y from 'yjs'
 
 export const Route = createFileRoute('/')({
 	component: IndexComponent,
 })
+
+declare global {
+	interface Window {
+		monacoBinding: MonacoBinding
+	}
+}
 
 function createDynamicClass(className: string, styles: string) {
 	const styleElement = document.createElement('style')
@@ -64,7 +71,7 @@ function IndexComponent() {
 											const model = editor.getModel()
 
 											if (model) {
-												const monacoBinding = new MonacoBinding(
+												window.monacoBinding = new MonacoBinding(
 													type,
 													model,
 													new Set([editor]),
