@@ -74,6 +74,15 @@ export function Layout({
 						</li>
 						<li>
 							<a
+								href='https://paulrosen.github.io/abcjs/'
+								target='_blank'
+								rel='noreferrer'
+							>
+								abcjs
+							</a>
+						</li>
+						<li>
+							<a
 								href='https://www.fastrat.dev'
 								target='_blank'
 								rel='noreferrer'

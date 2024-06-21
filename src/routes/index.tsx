@@ -7,7 +7,7 @@ import { HocuspocusProvider } from '@hocuspocus/provider'
 import * as abc from 'abcjs'
 import debounce from 'debounce'
 import { createRef, useCallback, useEffect, useRef, useState } from 'react'
-import { IndexeddbPersistence } from 'y-indexeddb'
+// import { IndexeddbPersistence } from 'y-indexeddb'
 import type { MonacoBinding } from 'y-monaco'
 import * as Y from 'yjs'
 
@@ -92,7 +92,6 @@ function IndexComponent() {
 					<section className='h-screen overflow-hidden col-span-1'>
 						{isMount && (
 							<Editor
-								height='100vh'
 								width='100%'
 								theme='vs-dark'
 								onMount={async (editor) => {
@@ -102,11 +101,11 @@ function IndexComponent() {
 									localStorage.name = name
 									const { MonacoBinding } = await import('y-monaco')
 									const ydoc = new Y.Doc()
-									const persistence = new IndexeddbPersistence(DOC_NAME, ydoc)
+									// const persistence = new IndexeddbPersistence(DOC_NAME, ydoc)
 
-									persistence.on('synced', () => {
-										console.log('content from the database is loaded')
-									})
+									// persistence.on('synced', () => {
+									// 	console.log('content from the database is loaded')
+									// })
 									const protocol =
 										window.location.protocol === 'http:' ? 'ws' : 'wss'
 									const origin = window.location.origin.replace(
