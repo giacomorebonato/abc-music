@@ -60,8 +60,8 @@ const config: UserConfig = {
 			},
 			manifest: {
 				theme_color: '#F4E2CA',
-				name: 'FastRat',
-				short_name: 'FastRat',
+				name: 'abc-music',
+				short_name: 'abc-music',
 				description:
 					'A starter kit with great DX for building PWA with Fastify + React',
 				icons: [

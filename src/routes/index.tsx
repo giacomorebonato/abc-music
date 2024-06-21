@@ -6,6 +6,7 @@ import 'abcjs/abcjs-audio.css'
 import { HocuspocusProvider } from '@hocuspocus/provider'
 import * as abc from 'abcjs'
 import { createRef, useEffect, useState } from 'react'
+import { IndexeddbPersistence } from 'y-indexeddb'
 import type { MonacoBinding } from 'y-monaco'
 import * as Y from 'yjs'
 
@@ -25,6 +26,8 @@ function createDynamicClass(className: string, styles: string) {
 	styleElement.textContent = rule
 	document.head.appendChild(styleElement)
 }
+
+const DOC_NAME = 'example-document'
 
 function IndexComponent() {
 	const sectionRef = createRef<HTMLElement>()
@@ -54,16 +57,17 @@ function IndexComponent() {
 
 									localStorage.name = name
 									const { MonacoBinding } = await import('y-monaco')
-									if (sectionRef.current) {
-										abc.renderAbc(sectionRef.current, editor.getValue())
-									}
-
 									const ydoc = new Y.Doc()
+									const persistence = new IndexeddbPersistence(DOC_NAME, ydoc)
+
+									persistence.on('synced', () => {
+										console.log('content from the database is loaded')
+									})
 									const provider = new HocuspocusProvider({
 										url: import.meta.env.PROD
-											? 'wss://abc-music.fly.dev/collab/example-document'
-											: 'ws://localhost:3000/collab/example-document',
-										name: 'example-document',
+											? `wss://abc-music.fly.dev/collab/${DOC_NAME}`
+											: `ws://localhost:3000/collab/${DOC_NAME}`,
+										name: DOC_NAME,
 										document: ydoc,
 										onConnect() {
 											const type = ydoc.getText('monaco')

@@ -6,8 +6,7 @@ import { migrate } from 'drizzle-orm/libsql/migrator'
 import { env } from '#/server/env'
 
 const client = createClient({
-	authToken: env.TURSO_DB_AUTH_TOKEN,
-	url: env.TURSO_DB_URL,
+	url: env.DATABASE_URL,
 })
 
 export const db = drizzle(client)

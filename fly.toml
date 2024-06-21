@@ -8,9 +8,14 @@ primary_region = 'ams'
 
 [build]
 
+[mounts]
+  source="abc_music_volume"
+  destination="/mnt/abc_music_volume"
+
 [env]
   HOST = '0.0.0.0'
   SITE_URL = 'https://abc-music.fly.dev/'
+  DATABASE_URL = 'file:/mnt/abc_music_volume/production.sqlite'
 
 [http_service]
   internal_port = 3000
