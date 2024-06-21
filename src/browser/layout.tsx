@@ -55,7 +55,7 @@ export function Layout({
 	})
 	return (
 		<div>
-			<div className='navbar bg-base-100'>
+			<div className='navbar bg-primary text-primary-content'>
 				<div className='flex-1'>
 					<a className='btn btn-ghost text-xl' href='/'>
 						abc-music
