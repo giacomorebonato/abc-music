@@ -153,6 +153,9 @@ function IndexComponent() {
 									)
 								}}
 								options={{
+									wordWrap: 'on',
+									scrollBeyondLastColumn: 0,
+									scrollBeyondLastLine: false,
 									minimap: {
 										enabled: false,
 									},
@@ -163,7 +166,7 @@ function IndexComponent() {
 							/>
 						)}
 					</section>
-					<section className='flex-2 h-screen p-4'>
+					<section className='flex-2 h-screen p-4 overflow-scroll'>
 						<div ref={sectionRef} />
 						<div ref={audioRef} id='audio' />
 					</section>
