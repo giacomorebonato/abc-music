@@ -5,7 +5,8 @@ import { Layout } from '#/browser/layout'
 import 'abcjs/abcjs-audio.css'
 import { HocuspocusProvider } from '@hocuspocus/provider'
 import * as abc from 'abcjs'
-import { createRef, useEffect, useState } from 'react'
+import debounce from 'debounce'
+import { createRef, useCallback, useEffect, useRef, useState } from 'react'
 import { IndexeddbPersistence } from 'y-indexeddb'
 import type { MonacoBinding } from 'y-monaco'
 import * as Y from 'yjs'
@@ -30,12 +31,51 @@ function createDynamicClass(className: string, styles: string) {
 const DOC_NAME = 'example-document'
 
 function IndexComponent() {
-	const sectionRef = createRef<HTMLElement>()
+	const sectionRef = createRef<HTMLDivElement>()
+	const audioRef = createRef<HTMLDivElement>()
+	const synthControlRef = useRef<abc.SynthObjectController>()
 	const [isMount, setIsMount] = useState(false)
 
 	useEffect(() => {
 		setIsMount(true)
+
+		if (abc.synth.supportsAudio()) {
+			const synthControl = new abc.synth.SynthController()
+			const cursorControl = {}
+			synthControl.load('#audio', cursorControl, {
+				displayLoop: true,
+				displayRestart: true,
+				displayPlay: true,
+				displayProgress: true,
+				displayWarp: true,
+			})
+			synthControlRef.current = synthControl
+		}
 	}, [])
+
+	useEffect(() => {
+		if (sectionRef.current) {
+			abc.renderAbc(sectionRef.current, '')
+		}
+	}, [sectionRef.current])
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	const updateMusic = useCallback(
+		debounce(async (code?: string) => {
+			if (!code || !sectionRef.current) {
+				return
+			}
+
+			const visualObj = abc.renderAbc(sectionRef.current, code)
+			const createSynth = new abc.synth.CreateSynth()
+			await createSynth.init({ visualObj: visualObj[0] })
+			// biome-ignore lint/style/noNonNullAssertion: <explanation>
+			synthControlRef.current!.setTune(visualObj[0], false, {
+				chordsOff: true,
+			})
+		}),
+		[synthControlRef.current, sectionRef.current],
+	)
 
 	return (
 		<Layout empty>
@@ -63,10 +103,14 @@ function IndexComponent() {
 									persistence.on('synced', () => {
 										console.log('content from the database is loaded')
 									})
+									const protocol =
+										window.location.protocol === 'http:' ? 'ws' : 'wss'
+									const origin = window.location.origin.replace(
+										window.location.protocol,
+										'',
+									)
 									const provider = new HocuspocusProvider({
-										url: import.meta.env.PROD
-											? `wss://abc-music.fly.dev/collab/${DOC_NAME}`
-											: `ws://localhost:3000/collab/${DOC_NAME}`,
+										url: `${protocol}:${origin}/collab/${DOC_NAME}`,
 										name: DOC_NAME,
 										document: ydoc,
 										onConnect() {
@@ -112,16 +156,17 @@ function IndexComponent() {
 									minimap: {
 										enabled: false,
 									},
+									fontSize: 16,
 								}}
-								onChange={(code) => {
-									if (code && sectionRef.current) {
-										abc.renderAbc(sectionRef.current, code)
-									}
-								}}
+								onChange={updateMusic}
+								language='markdown'
 							/>
 						)}
 					</section>
-					<section className='flex-2 h-screen p-4' ref={sectionRef} />
+					<section className='flex-2 h-screen p-4'>
+						<div ref={sectionRef} />
+						<div ref={audioRef} id='audio' />
+					</section>
 				</main>
 			</div>
 		</Layout>

@@ -1,7 +1,7 @@
 import { fastifyTRPCPlugin } from '@trpc/server/adapters/fastify'
 import { type FastifyServerOptions, fastify } from 'fastify'
 import { googleAuth } from '#/auth/google-auth'
-import { collabApi } from '#/collaboration/collab-api'
+import { collabPlugin } from '#/collaboration/collab-plugin'
 import { apiRouter } from './api-router'
 import { env } from './env'
 import { createContext } from './trpc-context'
@@ -34,7 +34,7 @@ export async function createServer(
 			trpcOptions: { createContext, router: apiRouter },
 			useWSS: true,
 		})
-		.register(collabApi)
+		.register(collabPlugin)
 		.ready()
 
 	return await server
