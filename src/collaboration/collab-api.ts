@@ -27,6 +27,8 @@ export const collabApi = (
 		extensions: [
 			new Database({
 				async fetch(data): Promise<Uint8Array> {
+					app.log.info(`Fetching ${data.documentName} from collab table`)
+
 					const file = await db
 						.select()
 						.from(collabSchema)
@@ -34,6 +36,8 @@ export const collabApi = (
 						.get()
 
 					if (!file) {
+						app.log.info(`documentName ${data.documentName} not found`)
+
 						const ydoc = new Y.Doc()
 						const type = ydoc.getText('monaco')
 						type.insert(0, cooleyTxt)
@@ -49,6 +53,7 @@ export const collabApi = (
 
 						return content
 					}
+					app.log.info(`documentName ${data.documentName} found`)
 
 					return file?.content as Uint8Array
 				},

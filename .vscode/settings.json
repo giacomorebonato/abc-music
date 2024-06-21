@@ -4,6 +4,12 @@
 	"editor.codeActionsOnSave": {
 		"quickfix.biome": "explicit"
 	},
+	"[typescript]": {
+		"editor.formatOnSave": true
+	},
+	"[typescriptreact]": {
+		"editor.formatOnSave": true
+	},
 	"workbench.colorCustomizations": {
 		"activityBar.activeBackground": "#966fe0",
 		"activityBar.background": "#966fe0",
