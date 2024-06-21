@@ -55,7 +55,7 @@ function IndexComponent() {
 
 	useEffect(() => {
 		if (sectionRef.current) {
-			abc.renderAbc(sectionRef.current, '')
+			// abc.renderAbc(sectionRef.current, '')
 		}
 	}, [sectionRef.current])
 
@@ -66,7 +66,11 @@ function IndexComponent() {
 				return
 			}
 
-			const visualObj = abc.renderAbc(sectionRef.current, code)
+			const visualObj = abc.renderAbc(sectionRef.current, code, {
+				scrollHorizontal: true,
+				viewportHorizontal: true,
+			})
+
 			const createSynth = new abc.synth.CreateSynth()
 			await createSynth.init({ visualObj: visualObj[0] })
 			// biome-ignore lint/style/noNonNullAssertion: <explanation>
@@ -84,8 +88,8 @@ function IndexComponent() {
 					<title>abc-music</title>
 				</Helmet>
 
-				<main className='flex flex-row w-full h-screen'>
-					<section className='flex-1 h-screen overflow-hidden'>
+				<main className='grid grid-flow-row grid-cols-2 w-full h-screen'>
+					<section className='h-screen overflow-hidden col-span-1'>
 						{isMount && (
 							<Editor
 								height='100vh'
@@ -166,7 +170,7 @@ function IndexComponent() {
 							/>
 						)}
 					</section>
-					<section className='flex-2 h-screen p-4 overflow-scroll'>
+					<section className='h-screen p-4 col-span-1'>
 						<div ref={sectionRef} />
 						<div ref={audioRef} id='audio' />
 					</section>
