@@ -75,7 +75,7 @@ export function Layout({
 						abc-music
 					</a>
 				</div>
-				<div className='flex-none'>
+				<div className='hidden md:block flex-none'>
 					<ul className='menu menu-horizontal px-1'>
 						<li>
 							<a
