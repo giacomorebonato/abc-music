@@ -30,7 +30,7 @@ declare global {
 }
 
 function IndexComponent() {
-	const editorRef = useRef<editor.IStandaloneCodeEditor>(null)
+	const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
 	const sectionRef = createRef<HTMLDivElement>()
 	const audioRef = createRef<HTMLDivElement>()
 	const synthControlRef = useRef<abc.SynthObjectController>()

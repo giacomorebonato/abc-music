@@ -75,7 +75,9 @@ export function AbcEditor(props: {
 
 				provider.on(
 					'awarenessUpdate',
-					({ states }: { states: { clientId: string }[] }) => {
+					({
+						states,
+					}: { states: { clientId: string; user: { name: string } }[] }) => {
 						for (const state of states) {
 							createDynamicClass(
 								`.yRemoteSelectionHead-${state.clientId}`,
@@ -83,7 +85,7 @@ export function AbcEditor(props: {
 							)
 							createDynamicClass(
 								`.yRemoteSelectionHead-${state.clientId}:hover::after`,
-								`content: '${name}';
+								`content: '${state.user.name}';
 											 cursor: pointer;
 											 padding: 4px;
 											 background-color: black;`,
