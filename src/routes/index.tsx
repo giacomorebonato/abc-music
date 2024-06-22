@@ -1,18 +1,26 @@
-import Editor from '@monaco-editor/react'
 import { createFileRoute } from '@tanstack/react-router'
 import { Helmet } from 'react-helmet-async'
 import { Layout } from '#/browser/layout'
 import 'abcjs/abcjs-audio.css'
-import { HocuspocusProvider } from '@hocuspocus/provider'
+import { useMediaQuery } from '@uidotdev/usehooks'
 import * as abc from 'abcjs'
+import { clsx } from 'clsx'
 import debounce from 'debounce'
-import { createRef, useCallback, useEffect, useRef, useState } from 'react'
-import { IndexeddbPersistence } from 'y-indexeddb'
+import type { editor } from 'monaco-editor'
+import { createRef, useCallback, useEffect, useRef } from 'react'
 import type { MonacoBinding } from 'y-monaco'
-import * as Y from 'yjs'
+import { z } from 'zod'
+import { AbcEditor } from '#/abc-editor/abc-editor'
+
+const searchSchema = z.object({
+	tab: z.enum(['edit', 'partiture', 'settings']).catch('edit').default('edit'),
+})
 
 export const Route = createFileRoute('/')({
 	component: IndexComponent,
+	validateSearch(search: Record<string, unknown>) {
+		return searchSchema.parse(search)
+	},
 })
 
 declare global {
@@ -21,24 +29,15 @@ declare global {
 	}
 }
 
-function createDynamicClass(className: string, styles: string) {
-	const styleElement = document.createElement('style')
-	const rule = `${className} { ${styles} }`
-	styleElement.textContent = rule
-	document.head.appendChild(styleElement)
-}
-
-const DOC_NAME = 'example-document'
-
 function IndexComponent() {
+	const editorRef = useRef<editor.IStandaloneCodeEditor>(null)
 	const sectionRef = createRef<HTMLDivElement>()
 	const audioRef = createRef<HTMLDivElement>()
 	const synthControlRef = useRef<abc.SynthObjectController>()
-	const [isMount, setIsMount] = useState(false)
+	const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)')
+	const { tab } = Route.useSearch()
 
 	useEffect(() => {
-		setIsMount(true)
-
 		if (abc.synth.supportsAudio()) {
 			const synthControl = new abc.synth.SynthController()
 			const cursorControl = {}
@@ -53,12 +52,6 @@ function IndexComponent() {
 		}
 	}, [])
 
-	useEffect(() => {
-		if (sectionRef.current) {
-			// abc.renderAbc(sectionRef.current, '')
-		}
-	}, [sectionRef.current])
-
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	const updateMusic = useCallback(
 		debounce(async (code?: string) => {
@@ -67,8 +60,8 @@ function IndexComponent() {
 			}
 
 			const visualObj = abc.renderAbc(sectionRef.current, code, {
-				scrollHorizontal: true,
-				viewportHorizontal: true,
+				expandToWidest: true,
+				responsive: 'resize',
 			})
 
 			const createSynth = new abc.synth.CreateSynth()
@@ -81,95 +74,44 @@ function IndexComponent() {
 		[synthControlRef.current, sectionRef.current],
 	)
 
+	useEffect(() => {
+		if (isSmallDevice && editorRef.current) {
+			updateMusic(editorRef.current.getValue())
+		}
+	}, [isSmallDevice, updateMusic])
+
 	return (
-		<Layout empty>
+		<Layout empty tab={tab}>
 			<div className='flex flex-col md:flex-row'>
 				<Helmet>
 					<title>abc-music</title>
 				</Helmet>
 
-				<main className='grid grid-flow-row grid-cols-2 w-full h-screen'>
-					<section className='h-screen overflow-hidden col-span-1'>
-						{isMount && (
-							<Editor
-								width='100%'
-								theme='vs-dark'
-								onMount={async (editor) => {
-									const name =
-										localStorage.name ?? prompt('Write your nickname')
-
-									localStorage.name = name
-									const { MonacoBinding } = await import('y-monaco')
-									const ydoc = new Y.Doc()
-									const persistence = new IndexeddbPersistence(DOC_NAME, ydoc)
-
-									persistence.on('synced', () => {
-										console.log('content from the database is loaded')
-									})
-									const protocol =
-										window.location.protocol === 'http:' ? 'ws' : 'wss'
-									const origin = window.location.origin.replace(
-										window.location.protocol,
-										'',
-									)
-									const provider = new HocuspocusProvider({
-										url: `${protocol}:${origin}/collab/${DOC_NAME}`,
-										name: DOC_NAME,
-										document: ydoc,
-										onConnect() {
-											const type = ydoc.getText('monaco')
-											const model = editor.getModel()
-
-											if (model) {
-												window.monacoBinding = new MonacoBinding(
-													type,
-													model,
-													new Set([editor]),
-													provider.awareness,
-												)
-											}
-										},
-									})
-
-									provider.setAwarenessField('user', {
-										name,
-										color: '#ffcc00',
-									})
-
-									provider.on(
-										'awarenessUpdate',
-										({ states }: { states: { clientId: string }[] }) => {
-											for (const state of states) {
-												createDynamicClass(
-													`.yRemoteSelectionHead-${state.clientId}`,
-													`border: 1px solid red;`,
-												)
-												createDynamicClass(
-													`.yRemoteSelectionHead-${state.clientId}:hover::after`,
-													`content: '${name}';
-											 cursor: pointer;
-											 padding: 4px;
-											 background-color: black;`,
-												)
-											}
-										},
-									)
-								}}
-								options={{
-									wordWrap: 'on',
-									scrollBeyondLastColumn: 0,
-									scrollBeyondLastLine: false,
-									minimap: {
-										enabled: false,
-									},
-									fontSize: 16,
-								}}
-								onChange={updateMusic}
-								language='markdown'
-							/>
-						)}
+				<main
+					className={clsx('w-full h-screen', {
+						'grid grid-flow-row grid-cols-2': !isSmallDevice,
+					})}
+				>
+					<section
+						className={clsx('h-screen overflow-hidden col-span-1', {
+							active: tab === 'edit',
+							hidden: isSmallDevice && tab !== 'edit',
+						})}
+					>
+						<AbcEditor
+							onChange={updateMusic}
+							onMount={(editor) => {
+								editorRef.current = editor
+							}}
+						/>
 					</section>
-					<section className='h-screen p-4 col-span-1'>
+
+					<section
+						className={clsx('h-screen p-4 col-span-1', {
+							'active w-full': tab === 'partiture',
+							hidden: isSmallDevice && tab !== 'partiture',
+						})}
+					>
 						<div ref={sectionRef} />
 						<div ref={audioRef} id='audio' />
 					</section>

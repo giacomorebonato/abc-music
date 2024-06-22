@@ -1,10 +1,17 @@
 import { Link, useRouter } from '@tanstack/react-router'
 import clsx from 'clsx'
 import type React from 'react'
-import { Suspense, lazy, useEffect, useRef } from 'react'
+import { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import {
+	AdjustmentsHorizontalIcon,
+	MusicalNoteIcon,
+	PencilIcon,
+} from '@heroicons/react/24/solid'
+import { useMediaQuery } from '@uidotdev/usehooks'
 import { P, match } from 'ts-pattern'
+import { useClientSnap } from '#/client-state'
 import { trpcClient } from './trpc-client'
 
 const contextClass = {
@@ -20,10 +27,17 @@ let Devtools: React.FC = () => null
 
 export function Layout({
 	children,
+	tab,
 	empty,
 	sidebar,
-}: { children: React.ReactNode; sidebar?: React.ReactNode; empty: boolean }) {
+}: {
+	children: React.ReactNode
+	sidebar?: React.ReactNode
+	empty: boolean
+	tab: 'edit' | 'partiture' | 'settings'
+}) {
 	const dialogRef = useRef<HTMLDialogElement | null>(null)
+
 	// const utils = trpcClient.useUtils()
 	// const profile = trpcClient.auth.profile.useQuery()
 	// const logout = trpcClient.auth.logout.useMutation({
@@ -94,6 +108,34 @@ export function Layout({
 				</div>
 			</div>
 			{children}
+			<div className='btm-nav md:hidden'>
+				<Link
+					to='/'
+					search={{
+						tab: 'edit',
+					}}
+				>
+					<PencilIcon className='size-6' />
+				</Link>
+
+				<Link
+					to='/'
+					search={{
+						tab: 'partiture',
+					}}
+				>
+					<MusicalNoteIcon className='size-6' />
+				</Link>
+
+				<Link
+					to='/'
+					search={{
+						tab: 'settings',
+					}}
+				>
+					<AdjustmentsHorizontalIcon className='size-6' />
+				</Link>
+			</div>
 		</div>
 	)
 }
