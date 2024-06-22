@@ -1,8 +1,8 @@
 import { Database } from '@hocuspocus/extension-database'
+import { Logger } from '@hocuspocus/extension-logger'
 import { Server as HocusPocusServer } from '@hocuspocus/server'
 import { eq } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
-import * as Y from 'yjs'
 import { db } from '#/db/db'
 import { collabSchema } from '#/db/schema'
 
@@ -13,8 +13,9 @@ export const collabPlugin = (
 ) => {
 	const hocusPocusServer = HocusPocusServer.configure({
 		extensions: [
+			new Logger(),
 			new Database({
-				async fetch(data): Promise<Uint8Array> {
+				async fetch(data): Promise<Uint8Array | null> {
 					app.log.info(`Fetching ${data.documentName} from collab table`)
 
 					const file = await db
@@ -26,27 +27,24 @@ export const collabPlugin = (
 					if (!file) {
 						app.log.info(`documentName ${data.documentName} not found`)
 
-						const ydoc = new Y.Doc()
-						const content = Y.encodeStateAsUpdateV2(ydoc)
-						await db
-							.insert(collabSchema)
-							.values({
-								id: data.documentName,
-							})
-							.run()
-
-						return content
+						return null
 					}
 					app.log.info(`documentName ${data.documentName} found`)
 
 					return file?.content as Uint8Array
 				},
-				store: async (data) => {
+				async store(data) {
 					await db
-						.update(collabSchema)
-						.set({
+						.insert(collabSchema)
+						.values({
 							id: data.documentName,
 							content: data.state,
+						})
+						.onConflictDoUpdate({
+							target: collabSchema.id,
+							set: {
+								content: data.state,
+							},
 						})
 						.run()
 				},
