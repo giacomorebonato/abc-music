@@ -75,10 +75,10 @@ function IndexComponent() {
 	)
 
 	useEffect(() => {
-		if (isSmallDevice && editorRef.current) {
+		if (isSmallDevice && editorRef.current && tab === 'partiture') {
 			updateMusic(editorRef.current.getValue())
 		}
-	}, [isSmallDevice, updateMusic])
+	}, [isSmallDevice, updateMusic, tab])
 
 	return (
 		<Layout empty tab={tab}>
