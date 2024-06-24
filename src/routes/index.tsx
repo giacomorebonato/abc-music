@@ -85,6 +85,10 @@ function IndexComponent() {
 			<div className='flex flex-col md:flex-row'>
 				<Helmet>
 					<title>abc-music</title>
+					<meta
+						name='description'
+						content='Collaborative text editor for ABC music notation.'
+					/>
 				</Helmet>
 
 				<main
