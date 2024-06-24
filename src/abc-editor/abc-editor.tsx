@@ -108,3 +108,5 @@ export function AbcEditor(props: {
 		/>
 	)
 }
+
+export default AbcEditor

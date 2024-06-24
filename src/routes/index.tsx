@@ -1,16 +1,15 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Helmet } from 'react-helmet-async'
-import { Layout } from '#/browser/layout'
-import 'abcjs/abcjs-audio.css'
 import * as abc from 'abcjs'
 import { clsx } from 'clsx'
 import debounce from 'debounce'
 import type { editor } from 'monaco-editor'
 import { createRef, useCallback, useEffect, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useMediaQuery } from 'usehooks-ts'
 import type { MonacoBinding } from 'y-monaco'
 import { z } from 'zod'
-import { AbcEditor } from '#/abc-editor/abc-editor'
+import { Layout } from '#/browser/layout'
+import { ClientOnly } from '#/server/client-only'
 
 const searchSchema = z.object({
 	tab: z.enum(['edit', 'partiture', 'settings']).catch('edit').default('edit'),
@@ -30,29 +29,13 @@ declare global {
 }
 
 function IndexComponent() {
-	const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
 	const sectionRef = createRef<HTMLDivElement>()
-	const audioRef = createRef<HTMLDivElement>()
-	const synthControlRef = useRef<abc.SynthObjectController>()
+	const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
 	const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)', {
-		defaultValue: true,
+		defaultValue: false,
 	})
 	const { tab } = Route.useSearch()
-
-	useEffect(() => {
-		if (abc.synth.supportsAudio()) {
-			const synthControl = new abc.synth.SynthController()
-			const cursorControl = {}
-			synthControl.load('#audio', cursorControl, {
-				displayLoop: true,
-				displayRestart: true,
-				displayPlay: true,
-				displayProgress: true,
-				displayWarp: true,
-			})
-			synthControlRef.current = synthControl
-		}
-	}, [])
+	const synthControlRef = useRef<abc.SynthObjectController>()
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	const updateMusic = useCallback(
@@ -68,8 +51,8 @@ function IndexComponent() {
 
 			const createSynth = new abc.synth.CreateSynth()
 			await createSynth.init({ visualObj: visualObj[0] })
-			// biome-ignore lint/style/noNonNullAssertion: <explanation>
-			synthControlRef.current!.setTune(visualObj[0], false, {
+
+			synthControlRef.current?.setTune(visualObj[0], false, {
 				chordsOff: true,
 			})
 		}),
@@ -91,12 +74,11 @@ function IndexComponent() {
 						name='description'
 						content='Collaborative text editor for ABC music notation.'
 					/>
+					<link rel='canonical' href='https://abc-music.fly.dev/' />
 				</Helmet>
 
 				<main
-					className={clsx('w-full h-screen', {
-						'grid grid-flow-row grid-cols-2': !isSmallDevice,
-					})}
+					className={'w-full h-screen md:grid md:grid-flow-row md:grid-cols-2'}
 				>
 					<section
 						className={clsx('h-screen overflow-hidden col-span-1', {
@@ -104,12 +86,19 @@ function IndexComponent() {
 							hidden: isSmallDevice && tab !== 'edit',
 						})}
 					>
-						<AbcEditor
-							onChange={updateMusic}
-							onMount={(editor) => {
-								editorRef.current = editor
-							}}
-						/>
+						<ClientOnly
+							load={() => import('#/abc-editor/abc-editor')}
+							fallback='...loading'
+						>
+							{(MyComponent) => (
+								<MyComponent
+									onChange={updateMusic}
+									onMount={(editor) => {
+										editorRef.current = editor
+									}}
+								/>
+							)}
+						</ClientOnly>
 					</section>
 
 					<section
@@ -118,8 +107,17 @@ function IndexComponent() {
 							hidden: isSmallDevice && tab !== 'partiture',
 						})}
 					>
-						<div ref={sectionRef} />
-						<div ref={audioRef} id='audio' />
+						<ClientOnly
+							load={() => import('#/abc-editor/partiture')}
+							fallback='Loading...'
+						>
+							{(MyComponent) => (
+								<MyComponent
+									sectionRef={sectionRef}
+									synthControlRef={synthControlRef}
+								/>
+							)}
+						</ClientOnly>
 					</section>
 				</main>
 			</div>

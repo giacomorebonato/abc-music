@@ -2,7 +2,9 @@ import { expect, test } from '@playwright/test'
 import { HtmlValidate } from 'html-validate/node'
 
 test(`it renders valid HTML`, async ({ browser }) => {
-	const context = await browser.newContext()
+	const context = await browser.newContext({
+		javaScriptEnabled: false,
+	})
 	const page = await context.newPage()
 	await page.goto('http://localhost:3000')
 

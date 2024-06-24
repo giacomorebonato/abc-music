@@ -9,7 +9,7 @@ import type { RouterContext } from '#/types/router-context'
 
 export const Route = createRootRouteWithContext<RouterContext>()({
 	loader({ context }) {
-		return { helmetContext: context.helmetContext ?? {} }
+		return { helmetContext: context?.helmetContext ?? {} }
 	},
 	component: RootComponent,
 })

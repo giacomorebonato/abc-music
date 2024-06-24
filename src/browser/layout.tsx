@@ -96,6 +96,7 @@ export function Layout({
 			<div className='btm-nav md:hidden'>
 				<Link
 					to='/'
+					aria-label='edit'
 					search={{
 						tab: 'edit',
 					}}
@@ -108,11 +109,13 @@ export function Layout({
 					search={{
 						tab: 'partiture',
 					}}
+					aria-label='partiture'
 				>
 					<MusicalNoteIcon className='size-6' />
 				</Link>
 
 				<Link
+					aria-label='settings'
 					to='/'
 					search={{
 						tab: 'settings',
