@@ -66,6 +66,7 @@
 		"strict-event-emitter": "^0.5.1",
 		"superjson": "^2.2.1",
 		"ts-pattern": "^5.1.2",
+		"usehooks-ts": "^3.1.0",
 		"valtio": "^1.13.2",
 		"y-indexeddb": "^9.0.12",
 		"y-monaco": "^0.1.5",

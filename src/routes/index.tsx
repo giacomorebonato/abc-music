@@ -2,12 +2,12 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Helmet } from 'react-helmet-async'
 import { Layout } from '#/browser/layout'
 import 'abcjs/abcjs-audio.css'
-import { useMediaQuery } from '@uidotdev/usehooks'
 import * as abc from 'abcjs'
 import { clsx } from 'clsx'
 import debounce from 'debounce'
 import type { editor } from 'monaco-editor'
 import { createRef, useCallback, useEffect, useRef } from 'react'
+import { useMediaQuery } from 'usehooks-ts'
 import type { MonacoBinding } from 'y-monaco'
 import { z } from 'zod'
 import { AbcEditor } from '#/abc-editor/abc-editor'
@@ -34,7 +34,9 @@ function IndexComponent() {
 	const sectionRef = createRef<HTMLDivElement>()
 	const audioRef = createRef<HTMLDivElement>()
 	const synthControlRef = useRef<abc.SynthObjectController>()
-	const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)')
+	const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)', {
+		defaultValue: true,
+	})
 	const { tab } = Route.useSearch()
 
 	useEffect(() => {

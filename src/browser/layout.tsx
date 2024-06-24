@@ -1,27 +1,12 @@
 import { Link, useRouter } from '@tanstack/react-router'
-import clsx from 'clsx'
 import type React from 'react'
 import { Suspense, lazy, useEffect, useRef, useState } from 'react'
-import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import {
 	AdjustmentsHorizontalIcon,
 	MusicalNoteIcon,
 	PencilIcon,
 } from '@heroicons/react/24/solid'
-import { useMediaQuery } from '@uidotdev/usehooks'
-import { P, match } from 'ts-pattern'
-import { useClientSnap } from '#/client-state'
-import { trpcClient } from './trpc-client'
-
-const contextClass = {
-	dark: 'bg-white-600 font-gray-300',
-	default: 'bg-primary',
-	error: 'bg-red-600',
-	info: 'bg-gray-600',
-	success: 'bg-blue-600',
-	warning: 'bg-orange-400',
-} as const
 
 let Devtools: React.FC = () => null
 
