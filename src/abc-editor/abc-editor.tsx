@@ -42,31 +42,34 @@ export function AbcEditor(props: {
 				const persistence = new IndexeddbPersistence(DOC_NAME, ydoc)
 
 				persistence.on('synced', () => {
-					console.log('content from the database is loaded')
+					console.log('Content from Indexeddb is loaded')
 				})
 				const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss'
 				const origin = window.location.origin.replace(
 					window.location.protocol,
 					'',
 				)
+
 				const provider = new HocuspocusProvider({
 					url: `${protocol}:${origin}/collab/${DOC_NAME}`,
 					name: DOC_NAME,
 					document: ydoc,
 					onConnect() {
-						const type = ydoc.getText('monaco')
-						const model = editor.getModel()
-
-						if (model) {
-							window.monacoBinding = new MonacoBinding(
-								type,
-								model,
-								new Set([editor]),
-								provider.awareness,
-							)
-						}
+						console.log('Hocuspocus connected')
 					},
 				})
+
+				const type = ydoc.getText('monaco')
+				const model = editor.getModel()
+
+				if (model) {
+					window.monacoBinding = new MonacoBinding(
+						type,
+						model,
+						new Set([editor]),
+						provider.awareness,
+					)
+				}
 
 				provider.setAwarenessField('user', {
 					name,
