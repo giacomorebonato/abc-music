@@ -1,6 +1,6 @@
 import { Link, useRouter } from '@tanstack/react-router'
 import type React from 'react'
-import { Suspense, lazy, useEffect, useRef, useState } from 'react'
+import { lazy, useEffect, useRef } from 'react'
 import 'react-toastify/dist/ReactToastify.css'
 import {
 	AdjustmentsHorizontalIcon,
@@ -21,8 +21,6 @@ export function Layout({
 	empty: boolean
 	tab: 'edit' | 'partiture' | 'settings'
 }) {
-	const dialogRef = useRef<HTMLDialogElement | null>(null)
-
 	// const utils = trpcClient.useUtils()
 	// const profile = trpcClient.auth.profile.useQuery()
 	// const logout = trpcClient.auth.logout.useMutation({
@@ -124,6 +122,8 @@ export function Layout({
 					<AdjustmentsHorizontalIcon className='size-6' />
 				</Link>
 			</div>
+
+			<Devtools />
 		</div>
 	)
 }
