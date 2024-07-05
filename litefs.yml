@@ -4,9 +4,22 @@ fuse:
 data:
   dir: "/var/lib/litefs"
 
+exit-on-error: false
+
 proxy:
   addr: ":8080"
   target: "0.0.0.0:3000"
 
 exec:
   - cmd: "node --run start"
+    if-primary: true
+
+  - cmd: "node --run start --readonly"
+    if-candidate: true
+
+lease:
+  For Fly.io deployment, use this instead:
+  type: "consul"
+  consul:
+    url: "${FLY_CONSUL_URL}"
+    key: "litefs/${FLY_APP_NAME}"
