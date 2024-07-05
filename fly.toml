@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for abc-music on 2024-06-20T13:40:37+01:00
+# fly.toml app configuration file generated for abc-music on 2024-07-05T11:59:34+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -8,14 +8,14 @@ primary_region = 'ams'
 
 [build]
 
-[mounts]
-  source="litefs"
-  destination="/var/lib/litefs"
-
 [env]
+  DATABASE_URL = 'sqlite:/litefs/production.sqlite'
   HOST = '0.0.0.0'
   SITE_URL = 'https://abc-music.fly.dev/'
-  DATABASE_URL = 'sqlite:/litefs/production.sqlite'
+
+[[mounts]]
+  source = 'litefs'
+  destination = '/var/lib/litefs'
 
 [http_service]
   internal_port = 3000
