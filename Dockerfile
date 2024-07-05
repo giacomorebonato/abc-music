@@ -15,8 +15,11 @@ RUN rm -rf public
 
 FROM node:22 as run
 
-RUN curl -L https://github.com/superfly/litefs/releases/latest/download/litefs-amd64 -o /usr/local/bin/litefs && \
+# Install LiteFS
+RUN apt-get update && apt-get install -y ca-certificates curl fuse3
+RUN curl -L https://github.com/superfly/litefs/releases/download/v0.5.9/litefs-amd64 -o /usr/local/bin/litefs && \
     chmod +x /usr/local/bin/litefs
+
     
 WORKDIR /app
 
