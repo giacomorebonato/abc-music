@@ -18,7 +18,6 @@ exec:
     if-candidate: true
 
 lease:
-  For Fly.io deployment, use this instead:
   type: "consul"
   consul:
     url: "${FLY_CONSUL_URL}"
