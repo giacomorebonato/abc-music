@@ -6,7 +6,7 @@ data:
 
 proxy:
   addr: ":8080"
-  target: "localhost:3000"
+  target: "0.0.0.0:3000"
 
 exec:
   - cmd: "node --run start"
