@@ -9,13 +9,13 @@ primary_region = 'ams'
 [build]
 
 [mounts]
-  source="abc_music_volume"
-  destination="/mnt/abc_music_volume"
+  source="litefs"
+  destination="/var/lib/litefs"
 
 [env]
   HOST = '0.0.0.0'
   SITE_URL = 'https://abc-music.fly.dev/'
-  DATABASE_URL = 'file:/mnt/abc_music_volume/production.sqlite'
+  DATABASE_URL = 'sqlite:/litefs/production.sqlite'
 
 [http_service]
   internal_port = 3000

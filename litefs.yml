@@ -1,0 +1,12 @@
+fuse:
+  dir: "/litefs"
+
+data:
+  dir: "/var/lib/litefs"
+
+proxy:
+  addr: ":8080"
+  target: "localhost:3000"
+
+exec:
+  - cmd: "node --run start"

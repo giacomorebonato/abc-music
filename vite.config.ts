@@ -3,6 +3,7 @@ import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
 import react from '@vitejs/plugin-react'
 import { vavite } from 'vavite'
 import type { UserConfig } from 'vite'
+import checker from 'vite-plugin-checker'
 import { VitePWA } from 'vite-plugin-pwa'
 
 const config: UserConfig = {
@@ -42,6 +43,9 @@ const config: UserConfig = {
 		},
 	],
 	plugins: [
+		checker({
+			typescript: true,
+		}),
 		VitePWA({
 			// https://vite-pwa-org.netlify.app/workbox/generate-sw.html
 			strategies: 'generateSW',

@@ -2,11 +2,8 @@ import Crypto from 'node:crypto'
 import { db } from '#/db/db'
 import { userTable } from '#/db/user-table'
 
-export const upsertUser = async (user: { email: string }): Promise<{
-	id: string
-	email: string | null
-}> => {
-	const dbUsers = await db
+export function upsertUser(user: { email: string }) {
+	const dbUsers = db
 		.insert(userTable)
 		.values({
 			email: user.email.trim(),
@@ -20,8 +17,11 @@ export const upsertUser = async (user: { email: string }): Promise<{
 		})
 		.returning({
 			email: userTable.email,
+			nickname: userTable.nickname,
 			id: userTable.id,
 		})
+		.all()
+
 	const dbUser = dbUsers[0]
 
 	if (dbUser) {

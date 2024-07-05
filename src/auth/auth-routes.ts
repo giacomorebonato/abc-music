@@ -13,7 +13,4 @@ export const authRouter = router({
 
 		return
 	}),
-	profile: publicProcedure.query(({ ctx }) => {
-		return ctx.user
-	}),
 })

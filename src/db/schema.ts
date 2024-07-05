@@ -1,2 +1,3 @@
-export { collabTable as collabSchema } from '#/db/collab-table'
-export { userTable as userSchema } from '#/db/user-table'
+export { collabTable } from '#/db/collab-table'
+export { userTable } from '#/db/user-table'
+export { profileTable } from '#/db/profile-table'

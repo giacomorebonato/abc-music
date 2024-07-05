@@ -5,14 +5,14 @@ import type { ComponentType, ReactNode } from 'react'
 export function ClientOnly<T>({
 	load,
 	children,
-	fallback,
+	fallback = null,
 	deps = [],
 }: {
 	load: () => Promise<
 		{ default: React.ComponentType<T> } | React.ComponentType<T>
 	>
 	children: (Component: React.ComponentType<T>) => ReactNode
-	fallback: ReactNode
+	fallback?: ReactNode | null
 	deps?: Parameters<typeof useEffect>[1]
 }) {
 	const [Component, setComponent] = useState<ComponentType<unknown> | null>(
@@ -26,12 +26,13 @@ export function ClientOnly<T>({
 				load()
 					.then((LoadedComponent) => {
 						return {
-							default: () =>
-								children(
+							default: () => {
+								return children(
 									'default' in LoadedComponent
 										? LoadedComponent.default
 										: LoadedComponent,
-								),
+								)
+							},
 						}
 					})
 					.catch((error) => {

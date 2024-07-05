@@ -24,7 +24,10 @@ export const Route = createFileRoute('/')({
 
 declare global {
 	interface Window {
+		createSynth: abc.MidiBuffer
 		monacoBinding: MonacoBinding
+		tuneObject: abc.TuneObject
+		synthControl: abc.SynthObjectController
 	}
 }
 
@@ -39,29 +42,41 @@ function IndexComponent() {
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	const updateMusic = useCallback(
-		debounce(async (code?: string) => {
-			if (!code || !sectionRef.current) {
+		debounce(async () => {
+			if (!editorRef.current || !sectionRef.current) {
 				return
 			}
+			const code = editorRef.current.getValue()
 
-			const visualObj = abc.renderAbc(sectionRef.current, code, {
+			const tuneObject = abc.renderAbc(sectionRef.current, code, {
 				expandToWidest: true,
 				responsive: 'resize',
-			})
+				clickListener(...params) {
+					console.log(params)
+				},
+			})[0]
 
-			const createSynth = new abc.synth.CreateSynth()
-			await createSynth.init({ visualObj: visualObj[0] })
-
-			synthControlRef.current?.setTune(visualObj[0], false, {
-				chordsOff: true,
-			})
+			if (tuneObject && window.createSynth) {
+				window.tuneObject = tuneObject
+				window.createSynth
+					.init({ visualObj: tuneObject })
+					.then(() => {
+						console.log(`Synth initialised`)
+						return window.synthControl.setTune(tuneObject, false, {
+							chordsOff: true,
+						})
+					})
+					.catch((error) => {
+						console.log(error)
+					})
+			}
 		}),
 		[synthControlRef.current, sectionRef.current],
 	)
 
 	useEffect(() => {
 		if (isSmallDevice && editorRef.current && tab === 'partiture') {
-			updateMusic(editorRef.current.getValue())
+			updateMusic()
 		}
 	}, [isSmallDevice, updateMusic, tab])
 
@@ -115,6 +130,7 @@ function IndexComponent() {
 								<MyComponent
 									sectionRef={sectionRef}
 									synthControlRef={synthControlRef}
+									updateMusic={updateMusic}
 								/>
 							)}
 						</ClientOnly>

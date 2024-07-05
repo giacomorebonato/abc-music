@@ -1,14 +1,14 @@
 import Path from 'node:path'
-import { createClient } from '@libsql/client'
 import appRootPath from 'app-root-path'
-import { drizzle } from 'drizzle-orm/libsql'
-import { migrate } from 'drizzle-orm/libsql/migrator'
+import Database from 'better-sqlite3'
+import { drizzle } from 'drizzle-orm/better-sqlite3'
+import { migrate } from 'drizzle-orm/better-sqlite3/migrator'
 import { env } from '#/server/env'
 
-const client = createClient({
-	url: env.DATABASE_URL,
-})
+const sqlite = new Database(env.DATABASE_URL)
 
-export const db = drizzle(client)
+sqlite.pragma('journal_mode = WAL')
+
+export const db = drizzle(sqlite)
 
 migrate(db, { migrationsFolder: Path.join(appRootPath.path, 'migrations') })

@@ -1,27 +1,15 @@
 {
   "version": "6",
   "dialect": "sqlite",
+  "id": "4eb4a478-9c58-4851-bb09-ee4ada6c0f1a",
+  "prevId": "c8d2f4bc-061f-45fd-b849-80c46efc1275",
   "tables": {
-    "notes": {
-      "name": "notes",
+    "collab": {
+      "name": "collab",
       "columns": {
-        "content": {
-          "name": "content",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
         "created_at": {
           "name": "created_at",
           "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "creator_id": {
-          "name": "creator_id",
-          "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
@@ -33,11 +21,41 @@
           "notNull": true,
           "autoincrement": false
         },
-        "title": {
-          "name": "title",
-          "type": "text",
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
+          "autoincrement": false
+        },
+        "content": {
+          "name": "content",
+          "type": "blob",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "profile": {
+      "name": "profile",
+      "columns": {
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
           "autoincrement": false
         },
         "updated_at": {
@@ -46,10 +64,53 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
+        },
+        "color": {
+          "name": "color",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "nickname": {
+          "name": "nickname",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
         }
       },
-      "indexes": {},
-      "foreignKeys": {},
+      "indexes": {
+        "profile_user_id_unique": {
+          "name": "profile_user_id_unique",
+          "columns": [
+            "user_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "profile_user_id_user_id_fk": {
+          "name": "profile_user_id_user_id_fk",
+          "tableFrom": "profile",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -63,13 +124,6 @@
           "notNull": false,
           "autoincrement": false
         },
-        "email": {
-          "name": "email",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
         "id": {
           "name": "id",
           "type": "text",
@@ -83,9 +137,38 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
+        },
+        "color": {
+          "name": "color",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "nickname": {
+          "name": "nickname",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "user_email_unique": {
+          "name": "user_email_unique",
+          "columns": [
+            "email"
+          ],
+          "isUnique": true
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
@@ -93,9 +176,11 @@
   },
   "enums": {},
   "_meta": {
+    "schemas": {},
     "tables": {},
     "columns": {}
   },
-  "id": "8deb6111-1ed5-4898-97b0-7c9549ce3c21",
-  "prevId": "5558bfaa-4924-4a3b-abd7-627003495d2e"
+  "internal": {
+    "indexes": {}
+  }
 }

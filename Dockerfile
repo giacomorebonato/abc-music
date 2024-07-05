@@ -15,10 +15,17 @@ RUN rm -rf public
 
 FROM node:22 as run
 
+RUN curl -L https://github.com/superfly/litefs/releases/latest/download/litefs-amd64 -o /usr/local/bin/litefs && \
+    chmod +x /usr/local/bin/litefs
+    
 WORKDIR /app
 
 COPY --from=build /app .
+# Copy LiteFS config
+COPY litefs.yml /etc/litefs.yml
 
 EXPOSE 3000
 
-CMD ["node", "--run", "start"]
+# CMD ["node", "--run", "start"]
+
+CMD litefs mount

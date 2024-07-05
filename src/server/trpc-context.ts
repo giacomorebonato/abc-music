@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { USER_TOKEN } from '#/auth/cookies'
 import { parseToken } from '#/auth/create-token'
 import { db } from '#/db/db.js'
+import * as schema from '#/db/schema'
 import { env } from './env'
 
 const userValidator = z.object({
@@ -39,5 +40,5 @@ export function createContext({ req, res }: CreateFastifyContextOptions) {
 		}
 	}
 
-	return { db, reply: res, request: req, user }
+	return { db, reply: res, request: req, user, schema }
 }

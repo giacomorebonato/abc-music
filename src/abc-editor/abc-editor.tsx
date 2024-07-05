@@ -1,9 +1,12 @@
 import { HocuspocusProvider } from '@hocuspocus/provider'
 import Editor, {} from '@monaco-editor/react'
+import { getContrast } from 'color2k'
 import type { editor } from 'monaco-editor'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
+import { toast } from 'react-toastify'
 import { IndexeddbPersistence } from 'y-indexeddb'
 import * as Y from 'yjs'
+import { trpcClient } from '#/browser/trpc-client'
 
 function createDynamicClass(className: string, styles: string) {
 	const styleElement = document.createElement('style')
@@ -12,21 +15,46 @@ function createDynamicClass(className: string, styles: string) {
 	document.head.appendChild(styleElement)
 }
 
+function getContrastingColor(hexColor: string) {
+	const blackContrast = getContrast(hexColor, '#000000')
+	const whiteContrast = getContrast(hexColor, '#FFFFFF')
+
+	return blackContrast > whiteContrast ? '#000000' : '#FFFFFF'
+}
+
 const DOC_NAME = 'example-document'
+
+type AwarenessState = {
+	clientId: string
+	user: {
+		nickname: string
+		color: string
+		contrastingColor: string
+	}
+}
 
 export function AbcEditor(props: {
 	onMount: (editor: editor.IStandaloneCodeEditor) => void
 	onChange: (code?: string) => void
 }) {
-	const [isMount, setIsMount] = useState(false)
+	const providerRef = useRef<HocuspocusProvider>()
+	const profile = trpcClient.profile.ownProfile.useQuery()
 
 	useEffect(() => {
-		setIsMount(true)
+		return () => {
+			providerRef.current?.disconnect()
+		}
 	}, [])
 
-	if (!isMount) {
-		return null
-	}
+	useEffect(() => {
+		if (profile.data?.color && providerRef.current) {
+			providerRef.current.setAwarenessField('user', {
+				nickname: profile.data.nickname,
+				contrastingColor: getContrastingColor(profile.data.color),
+				color: profile.data.color,
+			})
+		}
+	}, [profile.data])
 
 	return (
 		<Editor
@@ -34,15 +62,16 @@ export function AbcEditor(props: {
 			theme='vs-dark'
 			onMount={async (editor) => {
 				props.onMount(editor)
-				const name = localStorage.name ?? prompt('Write your nickname')
 
-				localStorage.name = name
 				const { MonacoBinding } = await import('y-monaco')
 				const ydoc = new Y.Doc()
 				const persistence = new IndexeddbPersistence(DOC_NAME, ydoc)
 
 				persistence.on('synced', () => {
-					console.log('Content from Indexeddb is loaded')
+					toast('Content from Indexeddb is loaded', {
+						autoClose: 500,
+						position: 'bottom-right',
+					})
 				})
 				const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss'
 				const origin = window.location.origin.replace(
@@ -50,7 +79,7 @@ export function AbcEditor(props: {
 					'',
 				)
 
-				const provider = new HocuspocusProvider({
+				providerRef.current = new HocuspocusProvider({
 					url: `${protocol}:${origin}/collab/${DOC_NAME}`,
 					name: DOC_NAME,
 					document: ydoc,
@@ -67,31 +96,33 @@ export function AbcEditor(props: {
 						type,
 						model,
 						new Set([editor]),
-						provider.awareness,
+						providerRef.current.awareness,
 					)
 				}
 
-				provider.setAwarenessField('user', {
-					name,
-					color: '#ffcc00',
-				})
-
-				provider.on(
+				providerRef.current.on(
 					'awarenessUpdate',
 					({
 						states,
-					}: { states: { clientId: string; user: { name: string } }[] }) => {
+					}: {
+						states: AwarenessState[]
+					}) => {
 						for (const state of states) {
+							if (!state.user?.color) {
+								continue
+							}
+
 							createDynamicClass(
 								`.yRemoteSelectionHead-${state.clientId}`,
-								`border: 1px solid red;`,
+								`border: 1px solid ${state.user.color};`,
 							)
 							createDynamicClass(
 								`.yRemoteSelectionHead-${state.clientId}:hover::after`,
-								`content: '${state.user.name}';
-											 cursor: pointer;
-											 padding: 4px;
-											 background-color: black;`,
+								`content: '${state.user.nickname}';
+								cursor: pointer;
+								padding: 4px;
+								color: ${state.user.contrastingColor}
+								background-color: ${state.user.color};`,
 							)
 						}
 					},
@@ -104,6 +135,7 @@ export function AbcEditor(props: {
 				minimap: {
 					enabled: false,
 				},
+
 				fontSize: 16,
 			}}
 			onChange={props.onChange}

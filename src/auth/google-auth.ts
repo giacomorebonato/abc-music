@@ -50,7 +50,7 @@ export const googleAuth = fastifyPlugin<{
 		)
 
 		fastify.get('/login/google/ci', async (request, reply) => {
-			return await updateDatabaseAndRedirect({
+			return updateDatabaseAndRedirect({
 				reply,
 				user: {
 					// biome-ignore lint/style/noNonNullAssertion: <explanation>
@@ -83,7 +83,7 @@ export const googleAuth = fastifyPlugin<{
 			const userData = await response.json()
 			const user = googleUserSchema.parse(userData)
 
-			await updateDatabaseAndRedirect({
+			updateDatabaseAndRedirect({
 				user,
 				reply,
 			})
@@ -93,14 +93,14 @@ export const googleAuth = fastifyPlugin<{
 	})
 })
 
-async function updateDatabaseAndRedirect({
+function updateDatabaseAndRedirect({
 	reply,
 	user,
 }: {
 	reply: FastifyReply
 	user: GoogleUser
 }) {
-	const dbUser = await upsertUser({ email: user.email })
+	const dbUser = upsertUser({ email: user.email })
 	const token = createToken(
 		{
 			email: dbUser.email,

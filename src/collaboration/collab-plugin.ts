@@ -4,7 +4,7 @@ import { Server as HocusPocusServer } from '@hocuspocus/server'
 import { eq } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import { db } from '#/db/db'
-import { collabSchema } from '#/db/schema'
+import { collabTable } from '#/db/schema'
 
 export const collabPlugin = (
 	app: FastifyInstance,
@@ -18,10 +18,10 @@ export const collabPlugin = (
 				async fetch(data): Promise<Uint8Array | null> {
 					app.log.info(`Fetching ${data.documentName} from collab table`)
 
-					const file = await db
+					const file = db
 						.select()
-						.from(collabSchema)
-						.where(eq(collabSchema.id, data.documentName))
+						.from(collabTable)
+						.where(eq(collabTable.id, data.documentName))
 						.get()
 
 					if (!file) {
@@ -33,15 +33,14 @@ export const collabPlugin = (
 
 					return file?.content as Uint8Array
 				},
-				async store(data) {
-					await db
-						.insert(collabSchema)
+				async store(data): Promise<void> {
+					db.insert(collabTable)
 						.values({
 							id: data.documentName,
 							content: data.state,
 						})
 						.onConflictDoUpdate({
-							target: collabSchema.id,
+							target: collabTable.id,
 							set: {
 								content: data.state,
 							},

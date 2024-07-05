@@ -1,14 +1,13 @@
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
+import { commonFields } from './common-fields'
 
 export const userTable = sqliteTable('user', {
-	createdAt: integer('created_at', { mode: 'timestamp' }).$defaultFn(() => {
-		return new Date()
-	}),
+	...commonFields,
+	color: text('color'),
+	nickname: text('nickname'),
 	email: text('email').unique(),
-	id: text('id').notNull().primaryKey(),
 	lastLoginAt: integer('updated_at', { mode: 'timestamp' }),
-	updatedAt: integer('updated_at', { mode: 'timestamp' }),
 })
 
 export const insertUserSchema = createInsertSchema(userTable)
