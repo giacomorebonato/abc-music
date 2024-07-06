@@ -8,6 +8,7 @@ exit-on-error: false
 
 proxy:
   addr: ":8080"
+  db: 'production'
   target: "0.0.0.0:3000"
 
 exec:
