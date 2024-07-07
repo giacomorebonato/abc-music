@@ -9,7 +9,7 @@ primary_region = 'ams'
 [build]
 
 [env]
-  DATABASE_URL = 'sqlite:/litefs/production.sqlite'
+  DATABASE_URL = 'sqlite:///litefs/production.sqlite'
   HOST = '0.0.0.0'
   SITE_URL = 'https://abc-music.fly.dev/'
 

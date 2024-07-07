@@ -26,7 +26,9 @@ COPY --from=flyio/litefs:0.5 /usr/local/bin/litefs /usr/local/bin/litefs
 # Copy LiteFS config
 COPY litefs.yml /etc/litefs.yml
 
-RUN mkdir -p /litefs /var/lib/litefs
+# Create necessary directories for FUSE and set permissions
+RUN mkdir -p /litefs /var/lib/litefs && \
+    chown node:node /litefs /var/lib/litefs
 
 EXPOSE 3000
 
