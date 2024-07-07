@@ -23,9 +23,16 @@ type GoogleUser = z.infer<typeof googleUserSchema>
 const isProduction = env.NODE_ENV === 'production'
 
 export const googleAuth = fastifyPlugin<{
-	GOOGLE_CLIENT_ID: string
-	GOOGLE_CLIENT_SECRET: string
+	GOOGLE_CLIENT_ID?: string
+	GOOGLE_CLIENT_SECRET?: string
 }>(async (fastify, clientCredentials) => {
+	if (
+		!clientCredentials.GOOGLE_CLIENT_ID ||
+		!clientCredentials.GOOGLE_CLIENT_SECRET
+	) {
+		fastify.log.warn(`Google authentication disabled`)
+		return
+	}
 	fastify.register(fastifyOauth2, {
 		callbackUri: new URL('/login/google/callback', env.SITE_URL).toString(),
 		callbackUriParams: {
