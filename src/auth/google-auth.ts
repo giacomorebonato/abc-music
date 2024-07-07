@@ -27,7 +27,7 @@ export const googleAuth = fastifyPlugin<{
 	GOOGLE_CLIENT_SECRET: string
 }>(async (fastify, clientCredentials) => {
 	fastify.register(fastifyOauth2, {
-		callbackUri: `${env.SITE_URL}/login/google/callback`,
+		callbackUri: new URL('/login/google/callback', env.SITE_URL).toString(),
 		callbackUriParams: {
 			access_type: 'offline', // will tell Google to send a refreshToken too
 		},
