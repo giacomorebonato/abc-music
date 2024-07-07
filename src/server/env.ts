@@ -7,8 +7,8 @@ const schema = z.object({
 		.string()
 		.default('false')
 		.transform((value) => value === 'true'),
-	GOOGLE_CLIENT_ID: z.string(),
-	GOOGLE_CLIENT_SECRET: z.string(),
+	GOOGLE_CLIENT_ID: z.string().optional(),
+	GOOGLE_CLIENT_SECRET: z.string().optional(),
 	HOST: z.string().default('0.0.0.0'),
 	HOST_NAMES_REDIRECT_FROM: z
 		.string()
