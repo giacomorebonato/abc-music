@@ -7,5 +7,6 @@ export const collabTable = sqliteTable('collab', {
 	content: blob('content'),
 })
 
+export type Collab = typeof collabTable.$inferSelect
 export const insertCollabSchema = createInsertSchema(collabTable)
 export const selectCollabSchema = createSelectSchema(collabTable)

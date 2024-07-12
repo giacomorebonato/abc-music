@@ -2,7 +2,7 @@ import { eq } from 'drizzle-orm'
 import { z } from 'zod'
 import { publicProcedure, router } from '#/server/trpc-server'
 
-export const profileRouter = router({
+export const profileApi = router({
 	ownProfile: publicProcedure.query(({ ctx }) => {
 		if (!ctx.user) {
 			return null

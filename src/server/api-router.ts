@@ -1,10 +1,10 @@
-import { authRouter } from '#/auth/auth-routes'
-import { profileRouter } from '#/profile/profile-routes'
+import { authApi } from '#/auth/auth-api'
+import { profileApi } from '#/profile/profile-api'
 import { router } from './trpc-server'
 
 export const apiRouter = router({
-	auth: authRouter,
-	profile: profileRouter,
+	auth: authApi,
+	profile: profileApi,
 })
 
 export type ApiRouter = typeof apiRouter
