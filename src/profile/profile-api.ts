@@ -1,4 +1,3 @@
-import { eq } from 'drizzle-orm'
 import { z } from 'zod'
 import { publicProcedure, router } from '#/server/trpc-server'
 
@@ -8,18 +7,21 @@ export const profileApi = router({
 			return null
 		}
 
-		const profiles = ctx.db
-			.select()
-			.from(ctx.schema.profileTable)
-			.where(eq(ctx.schema.profileTable.userId, ctx.user.userId))
-			.all()
+		const profile = ctx.db.query.profiles
+			.findFirst({
+				where: (profile, { eq }) => {
+					// biome-ignore lint/style/noNonNullAssertion: <explanation>
+					return eq(profile.userId, ctx.user!.userId)
+				},
+			})
+			.sync()
 
-		if (profiles.length) {
-			return profiles[0]
+		if (profile) {
+			return profile
 		}
 
-		const profile = ctx.db
-			.insert(ctx.schema.profileTable)
+		return ctx.db
+			.insert(ctx.schema.profiles)
 			.values({
 				color: '#fff',
 				nickname: 'nickname',
@@ -28,8 +30,6 @@ export const profileApi = router({
 			.onConflictDoNothing()
 			.returning()
 			.get()
-
-		return profile
 	}),
 	updateProfile: publicProcedure
 		.input(
@@ -40,7 +40,7 @@ export const profileApi = router({
 		)
 		.mutation(({ ctx, input }) => {
 			const data = ctx.db
-				.update(ctx.schema.profileTable)
+				.update(ctx.schema.profiles)
 				.set({ nickname: input.nickname, color: input.color })
 				.run()
 

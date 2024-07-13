@@ -1,7 +1,7 @@
 import * as Y from 'yjs'
 import type { Collab } from '#/db/collab-table'
 import { db } from '#/db/db'
-import { partitureTable } from '#/db/schema'
+import { partitures } from '#/db/schema'
 
 function getTitle(text: string) {
 	const lines = text.split('\n')
@@ -27,15 +27,15 @@ export function upsertPartiture(collab: Collab) {
 	const title = getTitle(text)
 
 	const entry = db
-		.insert(partitureTable)
+		.insert(partitures)
 		.values({
 			collabId: collab.id,
 			title,
 		})
 		.onConflictDoUpdate({
-			target: partitureTable.collabId,
+			target: partitures.collabId,
 			set: {
-				title,
+				title: title.trim(),
 			},
 		})
 		.returning()

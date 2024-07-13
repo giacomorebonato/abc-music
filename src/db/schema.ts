@@ -1,4 +1,4 @@
-export { collabTable } from '#/db/collab-table'
-export { partitureTable } from '#/db/partiture-table'
-export { userTable } from '#/db/user-table'
-export { profileTable } from '#/db/profile-table'
+export { collabTable as collabs } from '#/db/collab-table'
+export { partitureTable as partitures } from '#/db/partiture-table'
+export { userTable as users } from '#/db/user-table'
+export { profileTable as profiles } from '#/db/profile-table'

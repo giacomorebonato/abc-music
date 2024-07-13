@@ -1,31 +1,26 @@
-import { Link, useRouter } from '@tanstack/react-router'
+import { Link, useNavigate, useRouter } from '@tanstack/react-router'
 import type React from 'react'
 import { useEffect, useRef } from 'react'
 import 'react-toastify/dist/ReactToastify.css'
-import {
-	AdjustmentsHorizontalIcon,
-	CogIcon,
-	MusicalNoteIcon,
-	PencilIcon,
-} from '@heroicons/react/24/solid'
+import { Bars3Icon } from '@heroicons/react/24/solid'
+import Select from 'react-select'
 import { ToastContainer } from 'react-toastify'
+import { useDebounceValue } from 'usehooks-ts'
 import { ClientOnly } from '#/server/client-only'
 import { trpcClient } from './trpc-client'
 
 export function Layout({
 	children,
-	tab,
-	empty,
-	sidebar,
 }: {
 	children: React.ReactNode
-	sidebar?: React.ReactNode
-	empty: boolean
-	tab: 'edit' | 'partiture' | 'settings'
 }) {
+	const navigate = useNavigate()
 	const dialogRef = useRef<HTMLDialogElement | null>(null)
 	const utils = trpcClient.useUtils()
 	const profile = trpcClient.profile.ownProfile.useQuery()
+	const [text, setText] = useDebounceValue('', 1_000)
+	const search = trpcClient.partiture.search.useQuery({ text })
+
 	const logout = trpcClient.auth.logout.useMutation({
 		onSuccess() {
 			utils.profile.ownProfile.reset()
@@ -47,158 +42,106 @@ export function Layout({
 	}, [router.history])
 
 	return (
-		<div>
-			<div className='navbar bg-primary text-primary-content'>
-				<div className='flex-1'>
-					<Link
-						className='btn btn-ghost text-xl'
-						to='/'
-						search={{
-							tab: 'edit',
-						}}
-					>
-						abc-music
-					</Link>
-				</div>
-				<div className='flex-none gap-2'>
-					<div className='form-control'>
-						<input
-							type='text'
-							placeholder='Search'
-							className='input input-bordered w-24 md:w-auto'
-						/>
+		<div className='drawer drawer-end'>
+			<input
+				id='my-drawer'
+				type='checkbox'
+				className='drawer-toggle'
+				ref={checboxRef}
+			/>
+
+			<div className='drawer-content'>
+				<div className='navbar bg-primary text-primary-content'>
+					<div className='flex-1'>
+						<Link className='btn btn-ghost text-xl' to='/'>
+							abc-music
+						</Link>
 					</div>
-					<div className='dropdown dropdown-end'>
-						<div
-							tabIndex={0}
-							role='button'
-							className='btn btn-ghost btn-circle avatar'
-						>
-							<div className='w-10 rounded-full'>
-								<CogIcon />
+					<div className='flex-none gap-2'>
+						<div className='form-control'>
+							<Select
+								options={search.data ?? []}
+								isSearchable
+								className='w-52'
+								// className='input input-bordered w-24 md:w-auto'
+								placeholder='Search'
+								onInputChange={(newValue) => {
+									setText(newValue)
+								}}
+								onChange={(newValue) => {
+									if (newValue) {
+										navigate({
+											to: '/',
+											search: {
+												docId: newValue.value,
+											},
+										})
+									}
+								}}
+							/>
+						</div>
+						<div className='dropdown dropdown-end'>
+							<div
+								tabIndex={0}
+								role='button'
+								className='btn btn-ghost btn-circle avatar'
+							>
+								<label
+									htmlFor='my-drawer'
+									className='drawer-button cursor-pointer'
+								>
+									<div className='w-10 rounded-full'>
+										<Bars3Icon />
+									</div>
+								</label>
 							</div>
 						</div>
-						<ul
-							// biome-ignore lint/a11y/noNoninteractiveTabindex: I think this breaks the menu if removed
-							tabIndex={0}
-							className='menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-primary'
-						>
-							{profile.data ? (
-								<li>
-									<Link to='/profile'>Profile</Link>
-								</li>
-							) : null}
-
-							{profile.data ? (
-								<li>
-									<button
-										type='button'
-										onClick={() => {
-											logout.mutate()
-										}}
-									>
-										Logout
-									</button>
-								</li>
-							) : (
-								<li>
-									<button
-										type='button'
-										onClick={() => {
-											dialogRef.current?.showModal()
-										}}
-									>
-										Login
-									</button>
-								</li>
-							)}
-							<li>
-								<a
-									href='https://github.com/giacomorebonato/abc-music'
-									target='_blank'
-									rel='noreferrer'
-								>
-									GitHub
-								</a>
-							</li>
-						</ul>
 					</div>
 				</div>
-				{/* <div className='form-control'>
-					<input
-						type='text'
-						placeholder='Search'
-						className='input input-bordered w-24 md:w-auto text-primary'
-					/>
-				</div>
-				<div className='hidden md:block flex-none'>
-					<ul className='menu menu-horizontal px-1'>
-
-						<li>
-							<a
-								href='https://paulrosen.github.io/abcjs/'
-								target='_blank'
-								rel='noreferrer'
-							>
-								abcjs
-							</a>
-						</li>
-						<li>
-							<a
-								href='https://www.fastrat.dev'
-								target='_blank'
-								rel='noreferrer'
-							>
-								Made with FastRat
-							</a>
-						</li>
-						<li>
-							<details>
-								<summary>Parent</summary>
-								<ul className='z-10 bg-primary-content rounded-t-none p-2 text-primary'>
-									<li>
-										<a>Create new</a>
-									</li>
-									<li>
-										<a>Search</a>
-									</li>
-								</ul>
-							</details>
-						</li>
-					</ul>
-				</div> */}
+				{children}
 			</div>
-			{children}
-			<div className='btm-nav md:hidden'>
-				<Link
-					to='/'
-					aria-label='edit'
-					search={{
-						tab: 'edit',
-					}}
-				>
-					<PencilIcon className='size-6' />
-				</Link>
 
-				<Link
-					to='/'
-					search={{
-						tab: 'partiture',
-					}}
-					aria-label='partiture'
-				>
-					<MusicalNoteIcon className='size-6' />
-				</Link>
+			<div className='drawer-side'>
+				<label
+					htmlFor='my-drawer'
+					aria-label='close sidebar'
+					className='drawer-overlay'
+				/>
+				<ul className='menu bg-base-200 text-base-content min-h-full w-80 p-4'>
+					{/* Sidebar content here */}
+					<li>
+						<button
+							type='button'
+							onClick={() => {
+								navigate({ to: '/', search: { docId: crypto.randomUUID() } })
+							}}
+						>
+							Create new
+						</button>
+					</li>
 
-				<Link
-					aria-label='settings'
-					to='/'
-					search={{
-						tab: 'settings',
-					}}
-				>
-					<AdjustmentsHorizontalIcon className='size-6' />
-				</Link>
+					<li>
+						{profile.data ? (
+							<button
+								type='button'
+								onClick={() => {
+									logout.mutate()
+								}}
+							>
+								Logout
+							</button>
+						) : (
+							<button
+								type='button'
+								onClick={() => {
+									dialogRef.current?.showModal()
+								}}
+							>
+								Login
+							</button>
+						)}
+					</li>
+				</ul>
 			</div>
 
 			<dialog className='modal' id='my_modal_2' ref={dialogRef}>
@@ -212,9 +155,11 @@ export function Layout({
 			</dialog>
 
 			<ToastContainer />
-			<ClientOnly load={() => import('./devtools')}>
-				{(MyComponent) => <MyComponent />}
-			</ClientOnly>
+			{import.meta.env.DEV && (
+				<ClientOnly load={() => import('./devtools')}>
+					{(MyComponent) => <MyComponent />}
+				</ClientOnly>
+			)}
 		</div>
 	)
 }

@@ -1,17 +1,16 @@
-import { eq } from 'drizzle-orm'
 import { db } from '#/db/db'
 import { dbEvents } from '#/db/db-events'
-import { collabTable } from '#/db/schema'
+import { collabs } from '#/db/schema'
 
 export function upsertCollab(params: { content: Buffer; id: string }) {
 	const entry = db
-		.insert(collabTable)
+		.insert(collabs)
 		.values({
 			id: params.id,
 			content: params.content,
 		})
 		.onConflictDoUpdate({
-			target: collabTable.id,
+			target: collabs.id,
 			set: {
 				content: params.content,
 			},
@@ -25,5 +24,11 @@ export function upsertCollab(params: { content: Buffer; id: string }) {
 }
 
 export function getContentById(id: string) {
-	return db.select().from(collabTable).where(eq(collabTable.id, id)).get()
+	return db.query.collabs
+		.findFirst({
+			where: (collab, { eq }) => {
+				return eq(collab.id, id)
+			},
+		})
+		.sync()
 }

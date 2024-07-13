@@ -2,7 +2,7 @@ import { HocuspocusProvider } from '@hocuspocus/provider'
 import Editor, {} from '@monaco-editor/react'
 import { getContrast } from 'color2k'
 import type { editor } from 'monaco-editor'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 import { IndexeddbPersistence } from 'y-indexeddb'
 import * as Y from 'yjs'
@@ -22,8 +22,6 @@ function getContrastingColor(hexColor: string) {
 	return blackContrast > whiteContrast ? '#000000' : '#FFFFFF'
 }
 
-const DOC_NAME = 'example-document'
-
 type AwarenessState = {
 	clientId: string
 	user: {
@@ -34,11 +32,13 @@ type AwarenessState = {
 }
 
 export function AbcEditor(props: {
+	docId?: string
 	onMount: (editor: editor.IStandaloneCodeEditor) => void
 	onChange: (code?: string) => void
 }) {
 	const providerRef = useRef<HocuspocusProvider>()
 	const profile = trpcClient.profile.ownProfile.useQuery()
+	const docId = props.docId ?? 'example-document'
 
 	useEffect(() => {
 		return () => {
@@ -65,7 +65,7 @@ export function AbcEditor(props: {
 
 				const { MonacoBinding } = await import('y-monaco')
 				const ydoc = new Y.Doc()
-				const persistence = new IndexeddbPersistence(DOC_NAME, ydoc)
+				const persistence = new IndexeddbPersistence(docId, ydoc)
 
 				persistence.on('synced', () => {
 					toast('Content from Indexeddb is loaded', {
@@ -80,8 +80,8 @@ export function AbcEditor(props: {
 				)
 
 				providerRef.current = new HocuspocusProvider({
-					url: `${protocol}:${origin}/collab/${DOC_NAME}`,
-					name: DOC_NAME,
+					url: `${protocol}:${origin}/collab/${docId}`,
+					name: docId,
 					document: ydoc,
 					onConnect() {
 						console.log('Hocuspocus connected')

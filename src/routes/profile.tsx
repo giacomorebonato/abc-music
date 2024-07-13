@@ -39,7 +39,7 @@ function ProfileComponent() {
 	const profile = trpcClient.profile.ownProfile.useQuery()
 
 	return (
-		<Layout empty tab='edit'>
+		<Layout>
 			<Helmet>
 				<title>abc-music</title>
 				<meta
