@@ -63,7 +63,7 @@ export function Layout({
 								options={search.data ?? []}
 								isSearchable
 								className='w-52'
-								// className='input input-bordered w-24 md:w-auto'
+								isLoading={search.isLoading}
 								placeholder='Search'
 								onInputChange={(newValue) => {
 									setText(newValue)
