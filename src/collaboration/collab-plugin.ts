@@ -14,15 +14,18 @@ export const collabPlugin = (
 			new Logger(),
 			new Database({
 				async fetch(data): Promise<Uint8Array | null> {
-					const file = getContentById(data.documentName)
+					const file = getContentById(app.db, data.documentName)
 
 					return (file?.content as Uint8Array) ?? null
 				},
 				async store(data): Promise<void> {
-					upsertCollab({
-						content: data.state,
-						id: data.documentName,
-					})
+					upsertCollab(
+						{ db: app.db, dbEvents: app.dbEvents },
+						{
+							content: data.state,
+							id: data.documentName,
+						},
+					)
 				},
 			}),
 		],

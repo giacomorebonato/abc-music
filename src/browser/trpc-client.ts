@@ -5,7 +5,8 @@ import {
 	splitLink,
 	wsLink,
 } from '@trpc/react-query'
-import superjson from 'superjson'
+import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server'
+import { SuperJSON } from 'superjson'
 import type { ApiRouter } from '#/server/trpc-routes'
 
 export const trpcClient = createTRPCReact<ApiRouter>()
@@ -23,7 +24,7 @@ const getProtocol = (
 export function createLink() {
 	if (import.meta.env.SSR) {
 		return httpBatchLink({
-			transformer: superjson,
+			transformer: SuperJSON,
 			url: `${process.env.SITE_URL}/trpc`,
 		})
 	}
@@ -39,8 +40,11 @@ export function createLink() {
 		},
 		true: wsLink<ApiRouter>({
 			client: wsClient,
-			transformer: superjson,
+			transformer: SuperJSON,
 		}),
-		false: httpBatchLink({ url: httpUrl, transformer: superjson }),
+		false: httpBatchLink({ url: httpUrl, transformer: SuperJSON }),
 	})
 }
+
+export type RouterInput = inferRouterInputs<ApiRouter>
+export type RouterOutput = inferRouterOutputs<ApiRouter>

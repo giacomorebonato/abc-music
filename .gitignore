@@ -9,6 +9,7 @@ sqlite.db
 .env
 .DS_Store
 local.db
+local.db*
 readme-ai.md
 /e2e/user.json
 gha-creds-*.json

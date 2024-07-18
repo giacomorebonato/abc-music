@@ -1,6 +1,6 @@
 import * as Y from 'yjs'
 import type { Collab } from '#/db/collab-table'
-import { db } from '#/db/db'
+import type { AbcDatabase } from '#/db/db-plugin'
 import { partitures } from '#/db/schema'
 
 function getTitle(text: string) {
@@ -17,7 +17,7 @@ function getTitle(text: string) {
 	return title
 }
 
-export function upsertPartiture(collab: Collab) {
+export function upsertPartiture(db: AbcDatabase, collab: Collab) {
 	const buffer = collab.content as Buffer
 	const ydoc = new Y.Doc()
 

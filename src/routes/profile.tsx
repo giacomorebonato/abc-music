@@ -1,9 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
-import type * as abc from 'abcjs'
 import { Helmet } from 'react-helmet-async'
 import { toast } from 'react-toastify'
 import { useDebounceCallback } from 'usehooks-ts'
-import type { MonacoBinding } from 'y-monaco'
 import { z } from 'zod'
 import { Layout } from '#/browser/layout'
 import { trpcClient } from '#/browser/trpc-client'
@@ -11,15 +9,6 @@ import { trpcClient } from '#/browser/trpc-client'
 export const Route = createFileRoute('/profile')({
 	component: ProfileComponent,
 })
-
-declare global {
-	interface Window {
-		createSynth: abc.MidiBuffer
-		monacoBinding: MonacoBinding
-		tuneObject: abc.TuneObject
-		synthControl: abc.SynthObjectController
-	}
-}
 
 const formSchema = z.object({
 	color: z.string(),

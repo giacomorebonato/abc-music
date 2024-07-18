@@ -5,21 +5,20 @@ import debounce from 'debounce'
 import type { editor } from 'monaco-editor'
 import { createRef, useCallback, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
+
 // import { useMediaQuery } from 'usehooks-ts'
 import type { MonacoBinding } from 'y-monaco'
 import { z } from 'zod'
 import { Layout } from '#/browser/layout'
 import { ClientOnly } from '#/server/client-only'
 
-const searchSchema = z.object({
+const validateSearch = z.object({
 	docId: z.string().optional(),
 })
 
 export const Route = createFileRoute('/')({
 	component: IndexComponent,
-	validateSearch(search: Record<string, unknown>) {
-		return searchSchema.parse(search)
-	},
+	validateSearch,
 })
 
 declare global {

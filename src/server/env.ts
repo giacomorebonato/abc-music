@@ -21,7 +21,7 @@ const schema = z.object({
 	SECRET: z.string().default('a-good-repository-secret'),
 	SITE_URL: z.string().default('http://localhost:3000'),
 	TEST_EMAIL: z.string().default('fastrat@email.com'),
-	DATABASE_URL: z.string().default('file:sqlite.db'),
+	DATABASE_URL: z.string().default('local.db'),
 })
 
 export const env = schema.parse(process.env)

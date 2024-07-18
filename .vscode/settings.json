@@ -29,5 +29,8 @@
 		"titleBar.inactiveBackground": "#7845d799",
 		"titleBar.inactiveForeground": "#e7e7e799"
 	},
-	"peacock.color": "#7845d7"
+	"peacock.color": "#7845d7",
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features"
+	}
 }

@@ -1,8 +1,10 @@
-import { db } from '#/db/db'
-import { dbEvents } from '#/db/db-events'
+import type { AbcDatabase, DbEvents } from '#/db/db-plugin'
 import { collabs } from '#/db/schema'
 
-export function upsertCollab(params: { content: Buffer; id: string }) {
+export function upsertCollab(
+	{ db, dbEvents }: { db: AbcDatabase; dbEvents: DbEvents },
+	params: { content: Buffer; id: string },
+) {
 	const entry = db
 		.insert(collabs)
 		.values({
@@ -23,7 +25,7 @@ export function upsertCollab(params: { content: Buffer; id: string }) {
 	return entry
 }
 
-export function getContentById(id: string) {
+export function getContentById(db: AbcDatabase, id: string) {
 	return db.query.collabs
 		.findFirst({
 			where: (collab, { eq }) => {

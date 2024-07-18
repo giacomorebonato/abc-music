@@ -12,12 +12,18 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as ProfileImport } from './routes/profile'
+import { Route as PartituresImport } from './routes/partitures'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
 
 const ProfileRoute = ProfileImport.update({
   path: '/profile',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PartituresRoute = PartituresImport.update({
+  path: '/partitures',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -37,6 +43,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/partitures': {
+      id: '/partitures'
+      path: '/partitures'
+      fullPath: '/partitures'
+      preLoaderRoute: typeof PartituresImport
+      parentRoute: typeof rootRoute
+    }
     '/profile': {
       id: '/profile'
       path: '/profile'
@@ -49,7 +62,11 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({ IndexRoute, ProfileRoute })
+export const routeTree = rootRoute.addChildren({
+  IndexRoute,
+  PartituresRoute,
+  ProfileRoute,
+})
 
 /* prettier-ignore-end */
 
@@ -60,11 +77,15 @@ export const routeTree = rootRoute.addChildren({ IndexRoute, ProfileRoute })
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/partitures",
         "/profile"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/partitures": {
+      "filePath": "partitures.tsx"
     },
     "/profile": {
       "filePath": "profile.tsx"

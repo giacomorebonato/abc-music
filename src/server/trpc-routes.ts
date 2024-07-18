@@ -1,7 +1,7 @@
 import { partitureApi } from '#/abc-editor/partiture-api'
 import { authApi } from '#/auth/auth-api'
 import { profileApi } from '#/profile/profile-api'
-import { router } from './trpc-server'
+import { createCallerFactory, router } from './trpc-server'
 
 export const apiRouter = router({
 	auth: authApi,
@@ -10,3 +10,4 @@ export const apiRouter = router({
 })
 
 export type ApiRouter = typeof apiRouter
+export const createCaller = createCallerFactory(apiRouter)

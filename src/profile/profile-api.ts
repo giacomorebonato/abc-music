@@ -21,7 +21,7 @@ export const profileApi = router({
 		}
 
 		return ctx.db
-			.insert(ctx.schema.profiles)
+			.insert(ctx.t.profiles)
 			.values({
 				color: '#fff',
 				nickname: 'nickname',
@@ -40,7 +40,7 @@ export const profileApi = router({
 		)
 		.mutation(({ ctx, input }) => {
 			const data = ctx.db
-				.update(ctx.schema.profiles)
+				.update(ctx.t.profiles)
 				.set({ nickname: input.nickname, color: input.color })
 				.run()
 

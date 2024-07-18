@@ -2,6 +2,7 @@ import { fastifyOauth2 } from '@fastify/oauth2'
 import type { FastifyReply } from 'fastify'
 import { fastifyPlugin } from 'fastify-plugin'
 import { z } from 'zod'
+import type { AbcDatabase } from '#/db/db-plugin'
 import { env } from '#/server/env'
 import { USER_TOKEN } from './cookies'
 import { createToken } from './create-token'
@@ -58,6 +59,7 @@ export const googleAuth = fastifyPlugin<{
 
 		fastify.get('/login/google/ci', async (request, reply) => {
 			return updateDatabaseAndRedirect({
+				db: fastify.db,
 				reply,
 				user: {
 					// biome-ignore lint/style/noNonNullAssertion: <explanation>
@@ -91,6 +93,7 @@ export const googleAuth = fastifyPlugin<{
 			const user = googleUserSchema.parse(userData)
 
 			updateDatabaseAndRedirect({
+				db: fastify.db,
 				user,
 				reply,
 			})
@@ -101,13 +104,15 @@ export const googleAuth = fastifyPlugin<{
 })
 
 function updateDatabaseAndRedirect({
+	db,
 	reply,
 	user,
 }: {
+	db: AbcDatabase
 	reply: FastifyReply
 	user: GoogleUser
 }) {
-	const dbUser = upsertUser({ email: user.email })
+	const dbUser = upsertUser(db, { email: user.email })
 	const token = createToken(
 		{
 			email: dbUser.email,

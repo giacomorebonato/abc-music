@@ -1,8 +1,8 @@
 import Crypto from 'node:crypto'
-import { db } from '#/db/db'
+import type { AbcDatabase } from '#/db/db-plugin'
 import { userTable } from '#/db/user-table'
 
-export function upsertUser(user: { email: string }) {
+export function upsertUser(db: AbcDatabase, user: { email: string }) {
 	const dbUsers = db
 		.insert(userTable)
 		.values({

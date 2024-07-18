@@ -3,7 +3,6 @@ import type React from 'react'
 import { useEffect, useRef } from 'react'
 import 'react-toastify/dist/ReactToastify.css'
 import { Bars3Icon } from '@heroicons/react/24/solid'
-import Select from 'react-select'
 import { ToastContainer } from 'react-toastify'
 import { useDebounceValue } from 'usehooks-ts'
 import { ClientOnly } from '#/server/client-only'
@@ -59,26 +58,35 @@ export function Layout({
 					</div>
 					<div className='flex-none gap-2'>
 						<div className='form-control'>
-							<Select
-								options={search.data ?? []}
-								isSearchable
-								className='w-52'
-								isLoading={search.isLoading}
-								placeholder='Search'
-								onInputChange={(newValue) => {
-									setText(newValue)
-								}}
-								onChange={(newValue) => {
-									if (newValue) {
-										navigate({
-											to: '/',
-											search: {
-												docId: newValue.value,
-											},
-										})
-									}
-								}}
-							/>
+							<ClientOnly
+								load={() => import('react-select')}
+								deps={[search.data]}
+							>
+								{(Select) => (
+									<Select
+										options={search.data ?? []}
+										isSearchable
+										className='w-52'
+										isLoading={search.isLoading}
+										isMulti={false}
+										placeholder='Search'
+										onInputChange={(newValue) => {
+											setText(newValue)
+										}}
+										// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+										onChange={(newValue: any) => {
+											if (newValue) {
+												navigate({
+													to: '/',
+													search: {
+														docId: newValue.value,
+													},
+												})
+											}
+										}}
+									/>
+								)}
+							</ClientOnly>
 						</div>
 						<div className='dropdown dropdown-end'>
 							<div
@@ -118,6 +126,16 @@ export function Layout({
 						>
 							Create new
 						</button>
+					</li>
+					<li>
+						<Link
+							to='/partitures'
+							search={{
+								page: 0,
+							}}
+						>
+							Partitures
+						</Link>
 					</li>
 
 					<li>
