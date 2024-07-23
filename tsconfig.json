@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"incremental": true,
 		"noUnusedLocals": true,
 		"allowSyntheticDefaultImports": true,
 		"jsx": "react-jsx",
@@ -16,6 +17,7 @@
 		"strict": true,
 		"skipLibCheck": true,
 		"useDefineForClassFields": true,
+		"verbatimModuleSyntax": true,
 		"target": "ESNext",
 		"types": ["vite/client", "vite-plugin-pwa/react", "mdx"]
 	},

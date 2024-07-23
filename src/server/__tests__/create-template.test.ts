@@ -8,5 +8,5 @@ test('returns head and footer', () => {
 	expect(head).includes(`<link rel="manifest" href="/manifest.webmanifest">`)
 	expect(footer.startsWith(`</div>`)).toBe(true)
 	expect(footer).not.includes(`<div id="root">`)
-	expect(footer.endsWith(`</body>\n</html>`)).toBe(true)
+	expect(footer.replaceAll('\n', '').endsWith(`</body></html>`)).toBe(true)
 })

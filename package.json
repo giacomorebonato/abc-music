@@ -76,7 +76,7 @@
 		"y-monaco": "^0.1.5",
 		"y-protocols": "^1.0.6",
 		"yjs": "^13.6.18",
-		"zod": "^3.23.8"
+		"zod": "3.24.0-canary.20240701T200529"
 	},
 	"overrides": {
 		"monaco-editor": "^0.50.0"

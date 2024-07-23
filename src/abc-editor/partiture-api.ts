@@ -18,8 +18,6 @@ export const partitureApi = router({
 						if (input.text) {
 							return o.like(partiture.title, `%${input.text}%`)
 						}
-
-						return o.sql``
 					},
 				})
 				.sync()

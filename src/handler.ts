@@ -12,8 +12,11 @@ declare module 'node:net' {
 
 declare module 'node:http' {
 	interface Server {
-		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-		vaviteUpgradeHandler?: any
+		vaviteUpgradeHandler?: (
+			request: IncomingMessage,
+			socket: Socket,
+			head: Buffer,
+		) => void
 	}
 }
 

@@ -7,6 +7,7 @@ export function Partiture(props: {
 	sectionRef: React.RefObject<HTMLDivElement>
 	synthControlRef: React.MutableRefObject<abc.SynthObjectController | undefined>
 	updateMusic: DebouncedFunction<() => Promise<void>>
+	tempo: number
 }) {
 	const synthControlRef = useRef<abc.SynthObjectController>()
 	const [controlsLoaded, setControlsLoaded] = useState(false)
@@ -41,6 +42,14 @@ export function Partiture(props: {
 						setControlsLoaded(true)
 
 						props.updateMusic()
+
+						const tempoInput = document.querySelector<HTMLInputElement>(
+							'input.abcjs-midi-tempo',
+						)
+
+						if (tempoInput) {
+							tempoInput.value = props.tempo.toString()
+						}
 					}}
 				>
 					Load controls

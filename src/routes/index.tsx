@@ -110,11 +110,12 @@ function IndexComponent() {
 							load={() => import('#/abc-editor/partiture')}
 							fallback='Loading...'
 						>
-							{(MyComponent) => (
-								<MyComponent
+							{(Partiture) => (
+								<Partiture
 									sectionRef={sectionRef}
 									synthControlRef={synthControlRef}
 									updateMusic={updateMusic}
+									tempo={90}
 								/>
 							)}
 						</ClientOnly>

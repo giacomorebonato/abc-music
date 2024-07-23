@@ -106,7 +106,7 @@ importers:
         version: 0.32.0(@types/better-sqlite3@7.6.11)(@types/react@18.3.3)(better-sqlite3@11.1.2)(react@18.3.1)
       drizzle-zod:
         specifier: ^0.5.1
-        version: 0.5.1(drizzle-orm@0.32.0(@types/better-sqlite3@7.6.11)(@types/react@18.3.3)(better-sqlite3@11.1.2)(react@18.3.1))(zod@3.23.8)
+        version: 0.5.1(drizzle-orm@0.32.0(@types/better-sqlite3@7.6.11)(@types/react@18.3.3)(better-sqlite3@11.1.2)(react@18.3.1))(zod@3.24.0-canary.20240701T200529)
       fast-jwt:
         specifier: ^4.0.2
         version: 4.0.2
@@ -174,8 +174,8 @@ importers:
         specifier: ^13.6.18
         version: 13.6.18
       zod:
-        specifier: ^3.23.8
-        version: 3.23.8
+        specifier: 3.24.0-canary.20240701T200529
+        version: 3.24.0-canary.20240701T200529
     devDependencies:
       '@biomejs/biome':
         specifier: 1.8.3
@@ -6763,6 +6763,9 @@ packages:
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
+  zod@3.24.0-canary.20240701T200529:
+    resolution: {integrity: sha512-7cNGVqhVWHEmri9clARJ2x+jtnrdhrVRoCVw+cRYZ7AHg2XCRp/tzCxQRL3nCJzkBsIamPGLZSVkpWPtTYZHSA==}
+
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
@@ -10157,10 +10160,10 @@ snapshots:
       better-sqlite3: 11.1.2
       react: 18.3.1
 
-  drizzle-zod@0.5.1(drizzle-orm@0.32.0(@types/better-sqlite3@7.6.11)(@types/react@18.3.3)(better-sqlite3@11.1.2)(react@18.3.1))(zod@3.23.8):
+  drizzle-zod@0.5.1(drizzle-orm@0.32.0(@types/better-sqlite3@7.6.11)(@types/react@18.3.3)(better-sqlite3@11.1.2)(react@18.3.1))(zod@3.24.0-canary.20240701T200529):
     dependencies:
       drizzle-orm: 0.32.0(@types/better-sqlite3@7.6.11)(@types/react@18.3.3)(better-sqlite3@11.1.2)(react@18.3.1)
-      zod: 3.23.8
+      zod: 3.24.0-canary.20240701T200529
 
   dts-buddy@0.2.5:
     dependencies:
@@ -14220,5 +14223,7 @@ snapshots:
       readable-stream: 4.5.2
 
   zod@3.23.8: {}
+
+  zod@3.24.0-canary.20240701T200529: {}
 
   zwitch@2.0.4: {}

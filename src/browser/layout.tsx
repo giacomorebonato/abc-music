@@ -5,8 +5,14 @@ import 'react-toastify/dist/ReactToastify.css'
 import { Bars3Icon } from '@heroicons/react/24/solid'
 import { ToastContainer } from 'react-toastify'
 import { useDebounceValue } from 'usehooks-ts'
+import { z } from 'zod'
 import { ClientOnly } from '#/server/client-only'
 import { trpcClient } from './trpc-client'
+
+const optionSchema = z.object({
+	label: z.string(),
+	value: z.string(),
+})
 
 export function Layout({
 	children,
@@ -73,13 +79,14 @@ export function Layout({
 										onInputChange={(newValue) => {
 											setText(newValue)
 										}}
-										// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-										onChange={(newValue: any) => {
-											if (newValue) {
+										onChange={(newValue: unknown) => {
+											const parsed = optionSchema.safeParse(newValue)
+
+											if (parsed.success) {
 												navigate({
 													to: '/',
 													search: {
-														docId: newValue.value,
+														docId: parsed.data.value,
 													},
 												})
 											}
@@ -96,11 +103,9 @@ export function Layout({
 							>
 								<label
 									htmlFor='my-drawer'
-									className='drawer-button cursor-pointer'
+									className='drawer-button cursor-pointer w-10 rounded-full'
 								>
-									<div className='w-10 rounded-full'>
-										<Bars3Icon />
-									</div>
+									<Bars3Icon />
 								</label>
 							</div>
 						</div>

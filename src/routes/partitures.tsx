@@ -32,9 +32,11 @@ function Partitures() {
 				<link rel='canonical' href='https://abc-music.fly.dev/' />
 			</Helmet>
 			<main>
-				{partitures.data?.map((partiture) => {
-					return <div key={partiture.id}>{partiture.title}</div>
-				})}
+				<section className='p-4'>
+					{partitures.data?.map((partiture) => {
+						return <div key={partiture.id}>{partiture.title}</div>
+					})}
+				</section>
 			</main>
 		</Layout>
 	)
