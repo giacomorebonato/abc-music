@@ -1,5 +1,5 @@
 import * as Y from 'yjs'
-import type { Collab } from '#/db/collab-table'
+import type { CollabSchema } from '#/db/collab-table'
 import type { AbcDatabase } from '#/db/db-plugin'
 import { partitures } from '#/db/schema'
 
@@ -17,29 +17,55 @@ function getTitle(text: string) {
 	return title
 }
 
-export function upsertPartiture(db: AbcDatabase, collab: Collab) {
-	const buffer = collab.content as Buffer
-	const ydoc = new Y.Doc()
+export class PartitureQueries {
+	constructor(private db: AbcDatabase) {}
 
-	Y.applyUpdate(ydoc, buffer)
+	upsertFromCollab(
+		collab: Required<Pick<CollabSchema, 'id'>> & Partial<CollabSchema>,
+	) {
+		const buffer = collab.content
+		const ydoc = new Y.Doc()
 
-	const text = ydoc.getText('monaco').toJSON()
-	const title = getTitle(text)
+		Y.applyUpdate(ydoc, buffer as Uint8Array)
 
-	const entry = db
-		.insert(partitures)
-		.values({
-			collabId: collab.id,
-			title,
-		})
-		.onConflictDoUpdate({
-			target: partitures.collabId,
-			set: {
-				title: title.trim(),
-			},
-		})
-		.returning()
-		.get()
+		const text = ydoc.getText('monaco').toJSON()
+		const title = getTitle(text)
 
-	return entry
+		const entry = this.db
+			.insert(partitures)
+			.values({
+				collabId: collab.id,
+				title,
+			})
+			.onConflictDoUpdate({
+				target: partitures.collabId,
+				set: {
+					title: title.trim(),
+				},
+			})
+			.returning()
+			.get()
+
+		return entry
+	}
+
+	byCollabId(collabId: string) {
+		return this.db.query.partitures
+			.findFirst({
+				where: (partiture, { eq }) => {
+					return eq(partiture.collabId, collabId)
+				},
+			})
+			.sync()
+	}
+
+	byId(id: string) {
+		return this.db.query.partitures
+			.findFirst({
+				where: (partiture, { eq }) => {
+					return eq(partiture.id, id)
+				},
+			})
+			.sync()
+	}
 }

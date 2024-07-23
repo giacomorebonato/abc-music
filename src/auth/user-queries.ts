@@ -1,32 +1,33 @@
 import Crypto from 'node:crypto'
 import type { AbcDatabase } from '#/db/db-plugin'
-import { userTable } from '#/db/user-table'
+import { type UserSchema, userTable } from '#/db/user-table'
 
-export function upsertUser(db: AbcDatabase, user: { email: string }) {
-	const dbUsers = db
-		.insert(userTable)
-		.values({
-			email: user.email.trim(),
-			id: Crypto.randomUUID(),
-		})
-		.onConflictDoUpdate({
-			set: {
-				updatedAt: new Date(),
-			},
-			target: userTable.email,
-		})
-		.returning({
-			email: userTable.email,
-			nickname: userTable.nickname,
-			id: userTable.id,
-		})
-		.all()
+export class UserQueries {
+	db: AbcDatabase
+	constructor(_db: AbcDatabase) {
+		this.db = _db
+	}
+	upsert(user: Partial<UserSchema>) {
+		const dbUser = this.db
+			.insert(userTable)
+			.values({
+				// email: user.email.trim(),
+				...user,
+				id: user.id ?? Crypto.randomUUID(),
+			})
+			.onConflictDoUpdate({
+				set: {
+					updatedAt: new Date(),
+				},
+				target: userTable.email,
+			})
+			.returning({
+				email: userTable.email,
+				nickname: userTable.nickname,
+				id: userTable.id,
+			})
+			.get()
 
-	const dbUser = dbUsers[0]
-
-	if (dbUser) {
 		return dbUser
 	}
-
-	throw Error(`user not created`)
 }
