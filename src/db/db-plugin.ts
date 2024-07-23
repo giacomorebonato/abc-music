@@ -6,29 +6,37 @@ import { type BetterSQLite3Database, drizzle } from 'drizzle-orm/better-sqlite3'
 import { migrate } from 'drizzle-orm/better-sqlite3/migrator'
 import { fastifyPlugin } from 'fastify-plugin'
 import type TypedEmitter from 'typed-emitter'
-import { upsertPartiture } from '#/abc-editor/partiture-queries'
-import type { Collab } from './collab-table'
+import { PartitureQueries } from '#/abc-editor/partiture-queries'
+import type { CollabSchema } from './collab-table'
 import * as schema from './schema'
 
 export type DbEvents = TypedEmitter<{
-	upsertCollab: (entry: Collab) => void
+	upsertCollab: (entry: CollabSchema) => void
 }>
+
+export function createDb(dbUrl: string) {
+	const sqlite = new Database(dbUrl)
+
+	sqlite.pragma('journal_mode = WAL')
+
+	const db = drizzle(sqlite, { schema })
+
+	migrate(db, { migrationsFolder: Path.join(appRootPath.path, 'migrations') })
+
+	return db
+}
 
 export const dbPlugin = fastifyPlugin<{ dbUrl: string }>(
 	(fastify, params, done) => {
-		const sqlite = new Database(params.dbUrl)
-
-		sqlite.pragma('journal_mode = WAL')
-
-		const db = drizzle(sqlite, { schema })
-
-		migrate(db, { migrationsFolder: Path.join(appRootPath.path, 'migrations') })
+		const db = createDb(params.dbUrl)
 
 		fastify.db = db
 		fastify.dbEvents = new EventEmitter() as DbEvents
-		fastify.dbEvents.on('upsertCollab', (collab) =>
-			upsertPartiture(fastify.db, collab),
-		)
+		fastify.dbEvents.on('upsertCollab', (collab) => {
+			const partitureQueries = new PartitureQueries(db)
+
+			partitureQueries.upsertFromCollab(collab)
+		})
 
 		done()
 	},

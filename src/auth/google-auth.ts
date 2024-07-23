@@ -6,7 +6,7 @@ import type { AbcDatabase } from '#/db/db-plugin'
 import { env } from '#/server/env'
 import { USER_TOKEN } from './cookies'
 import { createToken } from './create-token'
-import { upsertUser } from './user-queries'
+import { UserQueries } from './user-queries'
 
 export const googleUserSchema = z.object({
 	email: z.string(),
@@ -112,7 +112,8 @@ function updateDatabaseAndRedirect({
 	reply: FastifyReply
 	user: GoogleUser
 }) {
-	const dbUser = upsertUser(db, { email: user.email })
+	const userQueries = new UserQueries(db)
+	const dbUser = userQueries.upsert({ email: user.email })
 	const token = createToken(
 		{
 			email: dbUser.email,

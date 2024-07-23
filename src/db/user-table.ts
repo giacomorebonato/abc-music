@@ -10,5 +10,6 @@ export const userTable = sqliteTable('user', {
 	lastLoginAt: integer('updated_at', { mode: 'timestamp' }),
 })
 
+export type UserSchema = typeof userTable.$inferSelect
 export const insertUserSchema = createInsertSchema(userTable)
 export const selectUserSchema = createSelectSchema(userTable)
