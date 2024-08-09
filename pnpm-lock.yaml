@@ -118,7 +118,7 @@ importers:
         version: 4.5.1
       framer-motion:
         specifier: ^11.3.5
-        version: 11.3.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 11.3.24(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       isbot:
         specifier: ^5.1.13
         version: 5.1.13
@@ -3908,8 +3908,8 @@ packages:
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
-  framer-motion@11.3.6:
-    resolution: {integrity: sha512-olpX48qfoSIDjhw0RbolhOGBQmdMAXHHpSI0PFdTj5LeXChcf5F4ApShs0mQ6FPEPOj7dnEvSyB07UgRK5G9Jw==}
+  framer-motion@11.3.24:
+    resolution: {integrity: sha512-kl0YI7HwAtyV0VOAWuU/rXoOS8+z5qSkMN6rZS+a9oe6fIha6SC3vjJN6u/hBpvjrg5MQNdSnqnjYxm0WYTX9g==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0
@@ -10784,7 +10784,7 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
-  framer-motion@11.3.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  framer-motion@11.3.24(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       tslib: 2.6.3
     optionalDependencies:
