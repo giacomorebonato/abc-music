@@ -82,7 +82,7 @@ importers:
         version: 11.0.0-rc.465
       abcjs:
         specifier: ^6.4.1
-        version: 6.4.1
+        version: 6.4.2
       app-root-path:
         specifier: ^3.1.0
         version: 3.1.0
@@ -2679,8 +2679,8 @@ packages:
   abbrev@1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
 
-  abcjs@6.4.1:
-    resolution: {integrity: sha512-E8hkfcwInZrKenI1io9PH78G66bvsOA8pqbuw0oENB4VZw8cTwUXUgY+eLdYpUiBb63qcnsiqBO/Y5nYhdVGOA==}
+  abcjs@6.4.2:
+    resolution: {integrity: sha512-NuupFWAQ4kZTlFaC5ubunsr95mzIYXau5wafFjAj9bdD5GZhuTeXuXAYYIOrfFxFge/6YxYB96pU7e/rIRjlIw==}
 
   abort-controller@3.0.0:
     resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}
@@ -3055,8 +3055,8 @@ packages:
   caniuse-lite@1.0.30001642:
     resolution: {integrity: sha512-3XQ0DoRgLijXJErLSl+bLnJ+Et4KqV1PY6JJBGAFlsNsz31zeAIncyeZfLCabHK/jtSh+671RM9YMldxjUPZtA==}
 
-  caniuse-lite@1.0.30001649:
-    resolution: {integrity: sha512-fJegqZZ0ZX8HOWr6rcafGr72+xcgJKI9oWfDW5DrD7ExUtgZC7a7R7ZYmZqplh7XDocFdGeIFn7roAxhOeYrPQ==}
+  caniuse-lite@1.0.30001651:
+    resolution: {integrity: sha512-9Cf+Xv1jJNe1xPZLGuUXLNkE1BoDkqRqYyFJ9TDYSqhduqA4hu4oR9HluGoWYQC/aj8WHjsGVV+bwkh0+tegRg==}
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -9494,7 +9494,7 @@ snapshots:
 
   abbrev@1.1.1: {}
 
-  abcjs@6.4.1: {}
+  abcjs@6.4.2: {}
 
   abort-controller@3.0.0:
     dependencies:
@@ -9843,7 +9843,7 @@ snapshots:
 
   browserslist@4.23.3:
     dependencies:
-      caniuse-lite: 1.0.30001649
+      caniuse-lite: 1.0.30001651
       electron-to-chromium: 1.5.5
       node-releases: 2.0.18
       update-browserslist-db: 1.1.0(browserslist@4.23.3)
@@ -9914,7 +9914,7 @@ snapshots:
 
   caniuse-lite@1.0.30001642: {}
 
-  caniuse-lite@1.0.30001649: {}
+  caniuse-lite@1.0.30001651: {}
 
   ccount@2.0.1: {}
 
