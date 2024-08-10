@@ -17,3 +17,4 @@ vite.config.ts.*
 coverage/
 .idea/
 sqlite*
+:memory*

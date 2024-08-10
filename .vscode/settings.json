@@ -10,6 +10,9 @@
 	"[typescriptreact]": {
 		"editor.formatOnSave": true
 	},
+	"[html]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
 	"workbench.colorCustomizations": {
 		"activityBar.activeBackground": "#966fe0",
 		"activityBar.background": "#966fe0",
@@ -29,8 +32,5 @@
 		"titleBar.inactiveBackground": "#7845d799",
 		"titleBar.inactiveForeground": "#e7e7e799"
 	},
-	"peacock.color": "#7845d7",
-	"[html]": {
-		"editor.defaultFormatter": "vscode.html-language-features"
-	}
+	"peacock.color": "#7845d7"
 }
