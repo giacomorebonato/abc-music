@@ -61,7 +61,7 @@ importers:
         version: 1.47.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tanstack/react-router-server':
         specifier: ^1.31.24
-        version: 1.31.24(@types/node@22.2.0)(ioredis@5.4.1)(magicast@0.3.4)(preact@10.22.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.18.1)(terser@5.31.5)
+        version: 1.31.24(@types/node@22.2.0)(ioredis@5.4.1)(magicast@0.3.4)(preact@10.22.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.20.0)(terser@5.31.5)
       '@tanstack/router-devtools':
         specifier: ^1.47.1
         version: 1.47.1(@tanstack/react-router@1.47.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -182,7 +182,7 @@ importers:
         version: 1.8.3
       '@mdx-js/rollup':
         specifier: ^3.0.1
-        version: 3.0.1(rollup@4.18.1)
+        version: 3.0.1(rollup@4.20.0)
       '@playwright/test':
         specifier: ^1.46.0
         version: 1.46.0
@@ -263,7 +263,7 @@ importers:
         version: 5.5.4
       vavite:
         specifier: ^4.1.1
-        version: 4.1.1(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))
+        version: 4.1.2(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))
       vite:
         specifier: ^5.4.0
         version: 5.4.0(@types/node@22.2.0)(terser@5.31.5)
@@ -2588,8 +2588,8 @@ packages:
   '@types/ms@0.7.34':
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
 
-  '@types/node@20.14.15':
-    resolution: {integrity: sha512-Fz1xDMCF/B00/tYSVMlmK7hVeLh7jE5f3B7X1/hmV0MJBwE27KlS7EvD/Yp+z1lm8mVhwV5w+n8jOZG8AfTlKw==}
+  '@types/node@18.19.44':
+    resolution: {integrity: sha512-ZsbGerYg72WMXUIE9fYxtvfzLEuq6q8mKERdWFnqTmOvudMxnz+CBNRoOwJ2kNpFOncrKjT1hZwxjlFgQ9qvQA==}
 
   '@types/node@22.2.0':
     resolution: {integrity: sha512-bm6EG6/pCpkxDf/0gDNDdtDILMOHgaQBVOJGdwsqClnxA3xL6jtMv76rLBc006RVMWbmaf0xbmom4Z/5o2nRkQ==}
@@ -2636,35 +2636,35 @@ packages:
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  '@vavite/connect@4.1.1':
-    resolution: {integrity: sha512-UjJEPX9t1fPNJiDbTzzW/ZIorTipCWO9x9aQ0CkNqtH6+dKnaWI/a03gFiNU+7ybhYI1LxdY17ar10ns7DQ08Q==}
+  '@vavite/connect@4.1.2':
+    resolution: {integrity: sha512-BeyDUMHM+OGlqrZkJaPj7JLmDzd00nmqg6baU/jgOmKKfvmtWl/Ybvss8k2G8d93jhcPjg6Bp3sbEXILLIRoSA==}
     peerDependencies:
       vite: ^2.8.1 || 3 || 4 || 5
 
-  '@vavite/expose-vite-dev-server@4.1.1':
-    resolution: {integrity: sha512-w+FsAF3OvjbITNkuMTxv/t28gGMWs8qngDGgk2OCdBcaQeyrdfAme0jIT4KrIx+GLQjwkzhoZXpQju/E3mbH+Q==}
+  '@vavite/expose-vite-dev-server@4.1.2':
+    resolution: {integrity: sha512-GySXeogW3f4GJea26x9fnPKGS20olk2t+TcxMXv9KIquk8yTqQIc1HIxe25DFIr+raCEl8hRIxxEXd7OzxHH0Q==}
     peerDependencies:
       vite: ^2.8.1 || 3 || 4 || 5
 
-  '@vavite/multibuild-cli@4.1.1':
-    resolution: {integrity: sha512-5jixDRjUH8fE3FVVGvlDGTatGrga886RlArCf3IUUpYKkued2qrUcq/BqdxSy6WukY15OS+l5nIVRwm1wB8AIQ==}
+  '@vavite/multibuild-cli@4.1.2':
+    resolution: {integrity: sha512-7rp/fBJVMzWpA2bN6i6QG/ii3znyQNaiuVf1WdQUfkqPRZWZM980Jyh9woUotGSGu5XLrlbOC7rt+lol5zFuUQ==}
     hasBin: true
     peerDependencies:
       vite: ^2.8.1 || 3 || 4 || 5
 
-  '@vavite/multibuild@4.1.1':
-    resolution: {integrity: sha512-R+UJWT2wH598OsGNA/NHgUgtOGvyh9kqaDsP/twJa/OJSH+RWgzj+ONQPqbkAYqPYu0NgRb8rkQOK4QJwdLx0A==}
+  '@vavite/multibuild@4.1.2':
+    resolution: {integrity: sha512-cGUoadUXNChe1NmU0BnQNdLlQNY/q9QcORoEX7LyVf5/EI+jgSbr11ljjWnAhSage6n5tv6Yki47ToNm/6c+qQ==}
     peerDependencies:
       vite: ^2.8.1 || 3 || 4 || 5
 
-  '@vavite/node-loader@4.1.1':
-    resolution: {integrity: sha512-3vJ3lnO2yJYE+i7DlZuSc7jUT4z+Fe4yVaxlODHWn1lpkVsXjIz2TfTp6zEJGXZJlhY1SnIzZczfQzA3Gs/NZw==}
+  '@vavite/node-loader@4.1.2':
+    resolution: {integrity: sha512-EnrbhHorFI5gL8B6DAoeM2LfI3NZMVUz1U9NPjm+tkgyx3EE6xFVclC2LGp3QdrvA4A+79Q/2+gDiJ16qLo1Ng==}
     hasBin: true
     peerDependencies:
       vite: ^2.8.1 || 3 || 4 || 5
 
-  '@vavite/reloader@4.1.1':
-    resolution: {integrity: sha512-7gzjA9NIVu+eRFATlhWndDKFM78xtBl225AwsnKjhNxUyYES0dLMc7vjH6aFi37S1f/JRRDQDm+ghrCVTUz62A==}
+  '@vavite/reloader@4.1.2':
+    resolution: {integrity: sha512-2Pd6wqiE5BwWiGEj6n3XHNKA8uhzDEw6KaZ9Iwx88hqJ0ahQ2VwXY1wtYY3bBxTqH3qFKfmfZntZv5mDAJedqQ==}
     peerDependencies:
       vite: ^2.8.1 || 3 || 4 || 5
 
@@ -6537,8 +6537,8 @@ packages:
       react:
         optional: true
 
-  vavite@4.1.1:
-    resolution: {integrity: sha512-OoEG1cJyMX6zfvXwO1Au506PUwMzRkeXrjxt6e6dnL9D8T3x7ZsC8HscHtL5u0orS10AMg5FPv1McBW5650e4w==}
+  vavite@4.1.2:
+    resolution: {integrity: sha512-4e5CRhI5GTLgd3SUUP7o+Y4MGb8aGKFGTztFSjLFAhdD8Bjcd2P5A2D21+oRpFISKAuZgw5rRky/kfi15RPoIw==}
     hasBin: true
     peerDependencies:
       vite: ^2.8.1 || 3 || 4 || 5
@@ -8641,11 +8641,11 @@ snapshots:
       '@types/react': 18.3.3
       react: 18.3.1
 
-  '@mdx-js/rollup@3.0.1(rollup@4.18.1)':
+  '@mdx-js/rollup@3.0.1(rollup@4.20.0)':
     dependencies:
       '@mdx-js/mdx': 3.0.1
-      '@rollup/pluginutils': 5.1.0(rollup@4.18.1)
-      rollup: 4.18.1
+      '@rollup/pluginutils': 5.1.0(rollup@4.20.0)
+      rollup: 4.20.0
       source-map: 0.7.4
       vfile: 6.0.2
     transitivePeerDependencies:
@@ -9154,7 +9154,7 @@ snapshots:
       '@tanstack/query-core': 5.51.21
       react: 18.3.1
 
-  '@tanstack/react-router-server@1.31.24(@types/node@22.2.0)(ioredis@5.4.1)(magicast@0.3.4)(preact@10.22.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.18.1)(terser@5.31.5)':
+  '@tanstack/react-router-server@1.31.24(@types/node@22.2.0)(ioredis@5.4.1)(magicast@0.3.4)(preact@10.22.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.20.0)(terser@5.31.5)':
     dependencies:
       '@tanstack/react-cross-context': 1.26.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tanstack/react-router': 1.31.24(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -9163,7 +9163,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       tiny-invariant: 1.3.3
-      vinxi: 0.2.1(@types/node@22.2.0)(ioredis@5.4.1)(magicast@0.3.4)(preact@10.22.1)(rollup@4.18.1)(terser@5.31.5)
+      vinxi: 0.2.1(@types/node@22.2.0)(ioredis@5.4.1)(magicast@0.3.4)(preact@10.22.1)(rollup@4.20.0)(terser@5.31.5)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -9445,7 +9445,7 @@ snapshots:
 
   '@types/ms@0.7.34': {}
 
-  '@types/node@20.14.15':
+  '@types/node@18.19.44':
     dependencies:
       undici-types: 5.26.5
 
@@ -9497,35 +9497,35 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vavite/connect@4.1.1(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))':
+  '@vavite/connect@4.1.2(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))':
     dependencies:
-      '@types/node': 20.14.15
+      '@types/node': 18.19.44
       vite: 5.4.0(@types/node@22.2.0)(terser@5.31.5)
 
-  '@vavite/expose-vite-dev-server@4.1.1(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))':
+  '@vavite/expose-vite-dev-server@4.1.2(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))':
     dependencies:
       vite: 5.4.0(@types/node@22.2.0)(terser@5.31.5)
 
-  '@vavite/multibuild-cli@4.1.1(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))':
+  '@vavite/multibuild-cli@4.1.2(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))':
     dependencies:
-      '@types/node': 20.14.15
-      '@vavite/multibuild': 4.1.1(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))
+      '@types/node': 18.19.44
+      '@vavite/multibuild': 4.1.2(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))
       cac: 6.7.14
       picocolors: 1.0.1
       vite: 5.4.0(@types/node@22.2.0)(terser@5.31.5)
 
-  '@vavite/multibuild@4.1.1(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))':
+  '@vavite/multibuild@4.1.2(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))':
     dependencies:
-      '@types/node': 20.14.15
+      '@types/node': 18.19.44
       cac: 6.7.14
       picocolors: 1.0.1
       vite: 5.4.0(@types/node@22.2.0)(terser@5.31.5)
 
-  '@vavite/node-loader@4.1.1(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))':
+  '@vavite/node-loader@4.1.2(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))':
     dependencies:
       vite: 5.4.0(@types/node@22.2.0)(terser@5.31.5)
 
-  '@vavite/reloader@4.1.1(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))':
+  '@vavite/reloader@4.1.2(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))':
     dependencies:
       vite: 5.4.0(@types/node@22.2.0)(terser@5.31.5)
 
@@ -9564,13 +9564,13 @@ snapshots:
       - encoding
       - supports-color
 
-  '@vinxi/devtools@0.2.0(@babel/core@7.24.9)(preact@10.22.1)(rollup@4.18.1)(vite@4.5.0(@types/node@22.2.0)(terser@5.31.5))':
+  '@vinxi/devtools@0.2.0(@babel/core@7.24.9)(preact@10.22.1)(rollup@4.20.0)(vite@4.5.0(@types/node@22.2.0)(terser@5.31.5))':
     dependencies:
       '@preact/preset-vite': 2.9.0(@babel/core@7.24.9)(preact@10.22.1)(vite@4.5.0(@types/node@22.2.0)(terser@5.31.5))
       '@solidjs/router': 0.8.4(solid-js@1.8.18)
       birpc: 0.2.17
       solid-js: 1.8.18
-      vite-plugin-inspect: 0.7.42(rollup@4.18.1)(vite@4.5.0(@types/node@22.2.0)(terser@5.31.5))
+      vite-plugin-inspect: 0.7.42(rollup@4.20.0)(vite@4.5.0(@types/node@22.2.0)(terser@5.31.5))
       vite-plugin-solid: 2.10.2(solid-js@1.8.18)(vite@4.5.0(@types/node@22.2.0)(terser@5.31.5))
       ws: 8.18.0
     transitivePeerDependencies:
@@ -14000,6 +14000,24 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
+  unimport@3.8.0(rollup@4.20.0):
+    dependencies:
+      '@rollup/pluginutils': 5.1.0(rollup@4.20.0)
+      acorn: 8.12.1
+      escape-string-regexp: 5.0.0
+      estree-walker: 3.0.3
+      fast-glob: 3.3.2
+      local-pkg: 0.5.0
+      magic-string: 0.30.10
+      mlly: 1.7.1
+      pathe: 1.1.2
+      pkg-types: 1.1.3
+      scule: 1.3.0
+      strip-literal: 2.1.0
+      unplugin: 1.12.1
+    transitivePeerDependencies:
+      - rollup
+
   unique-string@2.0.0:
     dependencies:
       crypto-random-string: 2.0.0
@@ -14130,14 +14148,14 @@ snapshots:
       '@types/react': 18.3.3
       react: 18.3.1
 
-  vavite@4.1.1(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5)):
+  vavite@4.1.2(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5)):
     dependencies:
-      '@vavite/connect': 4.1.1(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))
-      '@vavite/expose-vite-dev-server': 4.1.1(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))
-      '@vavite/multibuild': 4.1.1(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))
-      '@vavite/multibuild-cli': 4.1.1(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))
-      '@vavite/node-loader': 4.1.1(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))
-      '@vavite/reloader': 4.1.1(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))
+      '@vavite/connect': 4.1.2(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))
+      '@vavite/expose-vite-dev-server': 4.1.2(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))
+      '@vavite/multibuild': 4.1.2(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))
+      '@vavite/multibuild-cli': 4.1.2(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))
+      '@vavite/node-loader': 4.1.2(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))
+      '@vavite/reloader': 4.1.2(vite@5.4.0(@types/node@22.2.0)(terser@5.31.5))
       cac: 6.7.14
       picocolors: 1.0.1
       vite: 5.4.0(@types/node@22.2.0)(terser@5.31.5)
@@ -14153,7 +14171,7 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  vinxi@0.2.1(@types/node@22.2.0)(ioredis@5.4.1)(magicast@0.3.4)(preact@10.22.1)(rollup@4.18.1)(terser@5.31.5):
+  vinxi@0.2.1(@types/node@22.2.0)(ioredis@5.4.1)(magicast@0.3.4)(preact@10.22.1)(rollup@4.20.0)(terser@5.31.5):
     dependencies:
       '@babel/core': 7.24.9
       '@babel/plugin-syntax-jsx': 7.24.7(@babel/core@7.24.9)
@@ -14161,7 +14179,7 @@ snapshots:
       '@types/micromatch': 4.0.9
       '@types/serve-static': 1.15.7
       '@types/ws': 8.5.11
-      '@vinxi/devtools': 0.2.0(@babel/core@7.24.9)(preact@10.22.1)(rollup@4.18.1)(vite@4.5.0(@types/node@22.2.0)(terser@5.31.5))
+      '@vinxi/devtools': 0.2.0(@babel/core@7.24.9)(preact@10.22.1)(rollup@4.20.0)(vite@4.5.0(@types/node@22.2.0)(terser@5.31.5))
       '@vinxi/listhen': 1.5.6
       boxen: 7.1.1
       c12: 1.11.1(magicast@0.3.4)
@@ -14188,14 +14206,14 @@ snapshots:
       perfect-debounce: 1.0.0
       radix3: 1.1.2
       resolve: 1.22.8
-      rollup-plugin-visualizer: 5.12.0(rollup@4.18.1)
+      rollup-plugin-visualizer: 5.12.0(rollup@4.20.0)
       serve-placeholder: 2.0.2
       serve-static: 1.15.0
       ufo: 1.5.4
       uncrypto: 0.1.3
       unctx: 2.3.1
       unenv: 1.10.0
-      unimport: 3.8.0(rollup@4.18.1)
+      unimport: 3.8.0(rollup@4.20.0)
       unstorage: 1.10.2(ioredis@5.4.1)
       vite: 4.5.0(@types/node@22.2.0)(terser@5.31.5)
       ws: 8.18.0
@@ -14341,10 +14359,10 @@ snapshots:
       '@biomejs/biome': 1.8.3
       typescript: 5.5.4
 
-  vite-plugin-inspect@0.7.42(rollup@4.18.1)(vite@4.5.0(@types/node@22.2.0)(terser@5.31.5)):
+  vite-plugin-inspect@0.7.42(rollup@4.20.0)(vite@4.5.0(@types/node@22.2.0)(terser@5.31.5)):
     dependencies:
       '@antfu/utils': 0.7.10
-      '@rollup/pluginutils': 5.1.0(rollup@4.18.1)
+      '@rollup/pluginutils': 5.1.0(rollup@4.20.0)
       debug: 4.3.6
       error-stack-parser-es: 0.1.4
       fs-extra: 11.2.0
