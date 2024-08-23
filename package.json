@@ -60,7 +60,7 @@
 		"framer-motion": "^11.3.24",
 		"isbot": "^5.1.14",
 		"jsesc": "^3.0.2",
-		"monaco-editor": "^0.50.0",
+		"monaco-editor": "^0.51.0",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"react-helmet-async": "^2.0.5",
@@ -79,7 +79,7 @@
 		"zod": "3.24.0-canary.20240701T200529"
 	},
 	"overrides": {
-		"monaco-editor": "^0.50.0"
+		"monaco-editor": "^0.51.0"
 	},
 	"type": "module",
 	"devDependencies": {
