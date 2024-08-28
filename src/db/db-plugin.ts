@@ -6,12 +6,12 @@ import { type BetterSQLite3Database, drizzle } from 'drizzle-orm/better-sqlite3'
 import { migrate } from 'drizzle-orm/better-sqlite3/migrator'
 import { fastifyPlugin } from 'fastify-plugin'
 import type TypedEmitter from 'typed-emitter'
-import { PartitureQueries } from '#/abc-editor/partiture-queries'
+import { type Queries, buildQueries } from './build-queries'
 import type { CollabSchema } from './collab-table'
 import * as schema from './schema'
 
 export type DbEvents = TypedEmitter<{
-	upsertCollab: (entry: CollabSchema) => void
+	UPSERT_COLLAB: (entry: CollabSchema) => void
 }>
 
 export function createDb(dbUrl: string) {
@@ -29,16 +29,16 @@ export function createDb(dbUrl: string) {
 export const dbPlugin = fastifyPlugin<{ dbUrl: string }>(
 	(fastify, params, done) => {
 		const db = createDb(params.dbUrl)
+		const dbEvents = new EventEmitter() as DbEvents
 
 		fastify.db = db
-		fastify.dbEvents = new EventEmitter() as DbEvents
-		fastify.dbEvents.on('upsertCollab', (collab) => {
-			const partitureQueries = new PartitureQueries(db)
-
-			partitureQueries.upsertFromCollab(collab)
-		})
+		fastify.queries = buildQueries(db, dbEvents)
+		fastify.dbEvents = dbEvents
 
 		done()
+	},
+	{
+		name: 'db-plugin',
 	},
 )
 
@@ -50,5 +50,6 @@ declare module 'fastify' {
 	interface FastifyInstance {
 		db: AbcDatabase
 		dbEvents: DbEvents
+		queries: Queries
 	}
 }

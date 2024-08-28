@@ -3,15 +3,11 @@ import type { AbcDatabase } from '#/db/db-plugin'
 import { type UserSchema, userTable } from '#/db/user-table'
 
 export class UserQueries {
-	db: AbcDatabase
-	constructor(_db: AbcDatabase) {
-		this.db = _db
-	}
+	constructor(private db: AbcDatabase) {}
 	upsert(user: Partial<UserSchema>) {
 		const dbUser = this.db
 			.insert(userTable)
 			.values({
-				// email: user.email.trim(),
 				...user,
 				id: user.id ?? Crypto.randomUUID(),
 			})

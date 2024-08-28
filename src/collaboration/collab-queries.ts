@@ -1,3 +1,4 @@
+import Crypto from 'node:crypto'
 import type { CollabSchema } from '#/db/collab-table'
 import type { AbcDatabase, DbEvents } from '#/db/db-plugin'
 import { collabs } from '#/db/schema'
@@ -8,12 +9,13 @@ export class CollabQueries {
 		private dbEvents: DbEvents,
 	) {}
 
-	upsert(collab: Pick<CollabSchema, 'id'> & Partial<CollabSchema>) {
+	upsert(collab: Partial<CollabSchema>) {
+		const id = collab.id ?? Crypto.randomUUID()
 		const entry = this.db
 			.insert(collabs)
 			.values({
-				id: collab.id,
-				content: collab.content,
+				...collab,
+				id: id,
 			})
 			.onConflictDoUpdate({
 				target: collabs.id,
@@ -24,7 +26,7 @@ export class CollabQueries {
 			.returning()
 			.get() as CollabSchema
 
-		this.dbEvents.emit('upsertCollab', entry)
+		this.dbEvents.emit('UPSERT_COLLAB', entry)
 
 		return entry
 	}

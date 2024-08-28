@@ -24,3 +24,17 @@ test(`it renders valid HTML`, async ({ browser }) => {
 
 	expect(report.valid).toBe(true)
 })
+
+test(`it renders valid HTML of the main page with clientOnly rendering`, async ({
+	page,
+}) => {
+	page.on('console', (msg) => {
+		if (msg.type() === 'error') {
+			throw Error(msg.text())
+		}
+	})
+
+	await page.goto('http://localhost:3000?clientOnly=true')
+
+	expect(page.getByText(`abc-music`)).toBeVisible()
+})
