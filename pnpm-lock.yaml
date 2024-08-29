@@ -46,7 +46,7 @@ importers:
         version: 3.0.1(@types/react@18.3.4)(react@18.3.1)
       '@monaco-editor/react':
         specifier: ^4.6.0
-        version: 4.6.0(monaco-editor@0.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 4.6.0(monaco-editor@0.51.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tanstack/react-cross-context':
         specifier: ^1.44.2
         version: 1.44.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -126,8 +126,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       monaco-editor:
-        specifier: ^0.50.0
-        version: 0.50.0
+        specifier: ^0.51.0
+        version: 0.51.0
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -166,7 +166,7 @@ importers:
         version: 9.0.12(yjs@13.6.18)
       y-monaco:
         specifier: ^0.1.6
-        version: 0.1.6(monaco-editor@0.50.0)(yjs@13.6.18)
+        version: 0.1.6(monaco-editor@0.51.0)(yjs@13.6.18)
       y-protocols:
         specifier: ^1.0.6
         version: 1.0.6(yjs@13.6.18)
@@ -4977,8 +4977,8 @@ packages:
   mnemonist@0.39.8:
     resolution: {integrity: sha512-vyWo2K3fjrUw8YeeZ1zF0fy6Mu59RHokURlld8ymdUPjMlD9EC9ov1/YPqTgqRvUN9nTr3Gqfz29LYAmu0PHPQ==}
 
-  monaco-editor@0.50.0:
-    resolution: {integrity: sha512-8CclLCmrRRh+sul7C08BmPBP3P8wVWfBHomsTcndxg5NRCEPfu/mc2AGU8k37ajjDVXcXFc12ORAMUkmk+lkFA==}
+  monaco-editor@0.51.0:
+    resolution: {integrity: sha512-xaGwVV1fq343cM7aOYB6lVE4Ugf0UyimdD/x5PWcWBMKENwectaEu77FAN7c5sFiyumqeJdX1RPTh1ocioyDjw==}
 
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
@@ -8461,15 +8461,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@monaco-editor/loader@1.4.0(monaco-editor@0.50.0)':
+  '@monaco-editor/loader@1.4.0(monaco-editor@0.51.0)':
     dependencies:
-      monaco-editor: 0.50.0
+      monaco-editor: 0.51.0
       state-local: 1.0.7
 
-  '@monaco-editor/react@4.6.0(monaco-editor@0.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@monaco-editor/react@4.6.0(monaco-editor@0.51.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@monaco-editor/loader': 1.4.0(monaco-editor@0.50.0)
-      monaco-editor: 0.50.0
+      '@monaco-editor/loader': 1.4.0(monaco-editor@0.51.0)
+      monaco-editor: 0.51.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
@@ -12119,7 +12119,7 @@ snapshots:
     dependencies:
       obliterator: 2.0.4
 
-  monaco-editor@0.50.0: {}
+  monaco-editor@0.51.0: {}
 
   mri@1.2.0: {}
 
@@ -14483,10 +14483,10 @@ snapshots:
       lib0: 0.2.97
       yjs: 13.6.18
 
-  y-monaco@0.1.6(monaco-editor@0.50.0)(yjs@13.6.18):
+  y-monaco@0.1.6(monaco-editor@0.51.0)(yjs@13.6.18):
     dependencies:
       lib0: 0.2.97
-      monaco-editor: 0.50.0
+      monaco-editor: 0.51.0
       yjs: 13.6.18
 
   y-protocols@1.0.6(yjs@13.6.18):
