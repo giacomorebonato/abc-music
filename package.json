@@ -71,7 +71,7 @@
 		"ts-pattern": "^5.2.0",
 		"typed-emitter": "^2.1.0",
 		"usehooks-ts": "^3.1.0",
-		"valtio": "^1.13.2",
+		"valtio": "^2.0.0",
 		"y-indexeddb": "^9.0.12",
 		"y-monaco": "^0.1.6",
 		"y-protocols": "^1.0.6",
