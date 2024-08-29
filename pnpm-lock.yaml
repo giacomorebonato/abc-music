@@ -231,9 +231,6 @@ importers:
       globals:
         specifier: ^15.9.0
         version: 15.9.0
-      happy-dom:
-        specifier: ^14.12.3
-        version: 14.12.3
       html-validate:
         specifier: ^8.21.0
         version: 8.21.0(vitest@2.0.5(@types/node@22.5.1)(happy-dom@14.12.3)(terser@5.31.6))
@@ -11101,6 +11098,7 @@ snapshots:
       entities: 4.5.0
       webidl-conversions: 7.0.0
       whatwg-mimetype: 3.0.0
+    optional: true
 
   hard-rejection@2.1.0: {}
 
@@ -14287,13 +14285,15 @@ snapshots:
 
   webidl-conversions@4.0.2: {}
 
-  webidl-conversions@7.0.0: {}
+  webidl-conversions@7.0.0:
+    optional: true
 
   webpack-sources@3.2.3: {}
 
   webpack-virtual-modules@0.6.2: {}
 
-  whatwg-mimetype@3.0.0: {}
+  whatwg-mimetype@3.0.0:
+    optional: true
 
   whatwg-url@5.0.0:
     dependencies:
