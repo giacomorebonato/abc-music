@@ -61,7 +61,7 @@ importers:
         version: 1.51.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tanstack/react-router-server':
         specifier: ^1.31.24
-        version: 1.31.24(@types/node@22.5.1)(ioredis@5.4.1)(magicast@0.3.4)(preact@10.23.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.21.0)(terser@5.31.6)
+        version: 1.31.24(@types/node@22.5.1)(ioredis@5.4.1)(magicast@0.3.4)(preact@10.23.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.21.1)(terser@5.31.6)
       '@tanstack/router-devtools':
         specifier: ^1.47.1
         version: 1.51.4(@tanstack/react-router@1.51.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -72,14 +72,14 @@ importers:
         specifier: ^1.47.1
         version: 1.51.4(@types/node@22.5.1)(better-sqlite3@11.2.1)(drizzle-orm@0.33.0(@types/better-sqlite3@7.6.11)(@types/react@18.3.4)(better-sqlite3@11.2.1)(react@18.3.1))(ioredis@5.4.1)(magicast@0.3.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.2(@types/node@22.5.1)(terser@5.31.6))
       '@trpc/client':
-        specifier: 11.0.0-rc.489
-        version: 11.0.0-rc.489(@trpc/server@11.0.0-rc.489)
+        specifier: 11.0.0-rc.490
+        version: 11.0.0-rc.490(@trpc/server@11.0.0-rc.490)
       '@trpc/react-query':
         specifier: npm:@trpc/react-query@next
-        version: 11.0.0-rc.485(@tanstack/react-query@5.52.2(react@18.3.1))(@trpc/client@11.0.0-rc.489(@trpc/server@11.0.0-rc.489))(@trpc/server@11.0.0-rc.489)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 11.0.0-rc.485(@tanstack/react-query@5.52.2(react@18.3.1))(@trpc/client@11.0.0-rc.490(@trpc/server@11.0.0-rc.490))(@trpc/server@11.0.0-rc.490)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@trpc/server':
-        specifier: 11.0.0-rc.489
-        version: 11.0.0-rc.489
+        specifier: 11.0.0-rc.490
+        version: 11.0.0-rc.490
       abcjs:
         specifier: ^6.4.2
         version: 6.4.2
@@ -182,7 +182,7 @@ importers:
         version: 1.8.3
       '@mdx-js/rollup':
         specifier: ^3.0.1
-        version: 3.0.1(rollup@4.21.0)
+        version: 3.0.1(rollup@4.21.1)
       '@playwright/test':
         specifier: ^1.46.0
         version: 1.46.1
@@ -2452,10 +2452,10 @@ packages:
   '@tanstack/store@0.5.5':
     resolution: {integrity: sha512-EOSrgdDAJExbvRZEQ/Xhh9iZchXpMN+ga1Bnk8Nmygzs8TfiE6hbzThF+Pr2G19uHL6+DTDTHhJ8VQiOd7l4tA==}
 
-  '@trpc/client@11.0.0-rc.489':
-    resolution: {integrity: sha512-qIhdk+SBZrbs2+e+FXSz0YwnZqvArKLn9t4JRBaXrzsZiWvMBZH8ryWxwJ65/FLbNouKebaHDi5xJadZoXPhyQ==}
+  '@trpc/client@11.0.0-rc.490':
+    resolution: {integrity: sha512-rfAzHF27osuP36JWGzq9TgXMnNc5kk1oAIoMafVHkCu3XlEZH3Ym2BpucHBWp/b5JYrtvzM91jskzvE0yO3mYw==}
     peerDependencies:
-      '@trpc/server': 11.0.0-rc.489+6b483e375
+      '@trpc/server': 11.0.0-rc.490+b6a851870
 
   '@trpc/react-query@11.0.0-rc.485':
     resolution: {integrity: sha512-gFlJu9CXysfgsrVdKHFeROB8jsI50NjCQRrRimx5Tv4z3qSyT9IOVx+tyMhISDaj2haUPL1pFWhGMUiJGwo+Gg==}
@@ -2466,8 +2466,8 @@ packages:
       react: '>=18.2.0'
       react-dom: '>=18.2.0'
 
-  '@trpc/server@11.0.0-rc.489':
-    resolution: {integrity: sha512-dbD59LyEYgtxoAxMuNf15jnXgphLGc7/A53Y/D1v42r8WuSgez1BsS0bq3MYR7AUfiD9LHWEPZqnZxVCndpw0A==}
+  '@trpc/server@11.0.0-rc.490':
+    resolution: {integrity: sha512-JkKLvA0QIErqslsgU6uFvpv9xtxe78C59zqUdZFmUI0V9pIAJlxmODV4I9hTDcX8P+B30rP3z+q2+bPozN2MaQ==}
 
   '@types/acorn@4.0.6':
     resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}
@@ -8495,11 +8495,11 @@ snapshots:
       '@types/react': 18.3.4
       react: 18.3.1
 
-  '@mdx-js/rollup@3.0.1(rollup@4.21.0)':
+  '@mdx-js/rollup@3.0.1(rollup@4.21.1)':
     dependencies:
       '@mdx-js/mdx': 3.0.1
-      '@rollup/pluginutils': 5.1.0(rollup@4.21.0)
-      rollup: 4.21.0
+      '@rollup/pluginutils': 5.1.0(rollup@4.21.1)
+      rollup: 4.21.1
       source-map: 0.7.4
       vfile: 6.0.2
     transitivePeerDependencies:
@@ -9008,7 +9008,7 @@ snapshots:
       '@tanstack/query-core': 5.52.2
       react: 18.3.1
 
-  '@tanstack/react-router-server@1.31.24(@types/node@22.5.1)(ioredis@5.4.1)(magicast@0.3.4)(preact@10.23.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.21.0)(terser@5.31.6)':
+  '@tanstack/react-router-server@1.31.24(@types/node@22.5.1)(ioredis@5.4.1)(magicast@0.3.4)(preact@10.23.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.21.1)(terser@5.31.6)':
     dependencies:
       '@tanstack/react-cross-context': 1.26.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tanstack/react-router': 1.31.24(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -9017,7 +9017,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       tiny-invariant: 1.3.3
-      vinxi: 0.2.1(@types/node@22.5.1)(ioredis@5.4.1)(magicast@0.3.4)(preact@10.23.2)(rollup@4.21.0)(terser@5.31.6)
+      vinxi: 0.2.1(@types/node@22.5.1)(ioredis@5.4.1)(magicast@0.3.4)(preact@10.23.2)(rollup@4.21.1)(terser@5.31.6)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -9210,19 +9210,19 @@ snapshots:
 
   '@tanstack/store@0.5.5': {}
 
-  '@trpc/client@11.0.0-rc.489(@trpc/server@11.0.0-rc.489)':
+  '@trpc/client@11.0.0-rc.490(@trpc/server@11.0.0-rc.490)':
     dependencies:
-      '@trpc/server': 11.0.0-rc.489
+      '@trpc/server': 11.0.0-rc.490
 
-  '@trpc/react-query@11.0.0-rc.485(@tanstack/react-query@5.52.2(react@18.3.1))(@trpc/client@11.0.0-rc.489(@trpc/server@11.0.0-rc.489))(@trpc/server@11.0.0-rc.489)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@trpc/react-query@11.0.0-rc.485(@tanstack/react-query@5.52.2(react@18.3.1))(@trpc/client@11.0.0-rc.490(@trpc/server@11.0.0-rc.490))(@trpc/server@11.0.0-rc.490)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@tanstack/react-query': 5.52.2(react@18.3.1)
-      '@trpc/client': 11.0.0-rc.489(@trpc/server@11.0.0-rc.489)
-      '@trpc/server': 11.0.0-rc.489
+      '@trpc/client': 11.0.0-rc.490(@trpc/server@11.0.0-rc.490)
+      '@trpc/server': 11.0.0-rc.490
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@trpc/server@11.0.0-rc.489': {}
+  '@trpc/server@11.0.0-rc.490': {}
 
   '@types/acorn@4.0.6':
     dependencies:
@@ -9414,13 +9414,13 @@ snapshots:
       - encoding
       - supports-color
 
-  '@vinxi/devtools@0.2.0(@babel/core@7.25.2)(preact@10.23.2)(rollup@4.21.0)(vite@4.5.0(@types/node@22.5.1)(terser@5.31.6))':
+  '@vinxi/devtools@0.2.0(@babel/core@7.25.2)(preact@10.23.2)(rollup@4.21.1)(vite@4.5.0(@types/node@22.5.1)(terser@5.31.6))':
     dependencies:
       '@preact/preset-vite': 2.9.0(@babel/core@7.25.2)(preact@10.23.2)(vite@4.5.0(@types/node@22.5.1)(terser@5.31.6))
       '@solidjs/router': 0.8.4(solid-js@1.8.21)
       birpc: 0.2.17
       solid-js: 1.8.21
-      vite-plugin-inspect: 0.7.42(rollup@4.21.0)(vite@4.5.0(@types/node@22.5.1)(terser@5.31.6))
+      vite-plugin-inspect: 0.7.42(rollup@4.21.1)(vite@4.5.0(@types/node@22.5.1)(terser@5.31.6))
       vite-plugin-solid: 2.10.2(solid-js@1.8.21)(vite@4.5.0(@types/node@22.5.1)(terser@5.31.6))
       ws: 8.18.0
     transitivePeerDependencies:
@@ -13994,7 +13994,7 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  vinxi@0.2.1(@types/node@22.5.1)(ioredis@5.4.1)(magicast@0.3.4)(preact@10.23.2)(rollup@4.21.0)(terser@5.31.6):
+  vinxi@0.2.1(@types/node@22.5.1)(ioredis@5.4.1)(magicast@0.3.4)(preact@10.23.2)(rollup@4.21.1)(terser@5.31.6):
     dependencies:
       '@babel/core': 7.25.2
       '@babel/plugin-syntax-jsx': 7.24.7(@babel/core@7.25.2)
@@ -14002,7 +14002,7 @@ snapshots:
       '@types/micromatch': 4.0.9
       '@types/serve-static': 1.15.7
       '@types/ws': 8.5.12
-      '@vinxi/devtools': 0.2.0(@babel/core@7.25.2)(preact@10.23.2)(rollup@4.21.0)(vite@4.5.0(@types/node@22.5.1)(terser@5.31.6))
+      '@vinxi/devtools': 0.2.0(@babel/core@7.25.2)(preact@10.23.2)(rollup@4.21.1)(vite@4.5.0(@types/node@22.5.1)(terser@5.31.6))
       '@vinxi/listhen': 1.5.6
       boxen: 7.1.1
       c12: 1.11.1(magicast@0.3.4)
@@ -14029,14 +14029,14 @@ snapshots:
       perfect-debounce: 1.0.0
       radix3: 1.1.2
       resolve: 1.22.8
-      rollup-plugin-visualizer: 5.12.0(rollup@4.21.0)
+      rollup-plugin-visualizer: 5.12.0(rollup@4.21.1)
       serve-placeholder: 2.0.2
       serve-static: 1.15.0
       ufo: 1.5.4
       uncrypto: 0.1.3
       unctx: 2.3.1
       unenv: 1.10.0
-      unimport: 3.11.1(rollup@4.21.0)
+      unimport: 3.11.1(rollup@4.21.1)
       unstorage: 1.10.2(ioredis@5.4.1)
       vite: 4.5.0(@types/node@22.5.1)(terser@5.31.6)
       ws: 8.18.0
@@ -14182,10 +14182,10 @@ snapshots:
       '@biomejs/biome': 1.8.3
       typescript: 5.5.4
 
-  vite-plugin-inspect@0.7.42(rollup@4.21.0)(vite@4.5.0(@types/node@22.5.1)(terser@5.31.6)):
+  vite-plugin-inspect@0.7.42(rollup@4.21.1)(vite@4.5.0(@types/node@22.5.1)(terser@5.31.6)):
     dependencies:
       '@antfu/utils': 0.7.10
-      '@rollup/pluginutils': 5.1.0(rollup@4.21.0)
+      '@rollup/pluginutils': 5.1.0(rollup@4.21.1)
       debug: 4.3.6
       error-stack-parser-es: 0.1.5
       fs-extra: 11.2.0
