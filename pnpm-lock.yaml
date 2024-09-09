@@ -70,7 +70,7 @@ importers:
         version: 1.56.4(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6))
       '@tanstack/start':
         specifier: ^1.47.1
-        version: 1.56.5(@types/node@22.5.4)(better-sqlite3@11.2.1)(drizzle-orm@0.33.0(@types/better-sqlite3@7.6.11)(@types/react@18.3.5)(better-sqlite3@11.2.1)(react@18.3.1))(ioredis@5.4.1)(magicast@0.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6))
+        version: 1.56.5(@types/node@22.5.4)(better-sqlite3@11.2.1)(drizzle-orm@0.33.0(@types/better-sqlite3@7.6.11)(@types/react@18.3.5)(better-sqlite3@11.2.1)(react@18.3.1))(ioredis@5.4.1)(magicast@0.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.6)(typescript@5.6.2)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6))
       '@trpc/client':
         specifier: 11.0.0-rc.502
         version: 11.0.0-rc.502(@trpc/server@11.0.0-rc.502)
@@ -257,7 +257,7 @@ importers:
         version: 3.4.10
       typescript:
         specifier: ^5.5.4
-        version: 5.5.4
+        version: 5.6.2
       vavite:
         specifier: ^4.1.1
         version: 4.1.3(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6))
@@ -266,7 +266,7 @@ importers:
         version: 5.4.3(@types/node@22.5.4)(terser@5.31.6)
       vite-plugin-checker:
         specifier: ^0.7.2
-        version: 0.7.2(@biomejs/biome@1.8.3)(typescript@5.5.4)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6))
+        version: 0.7.2(@biomejs/biome@1.8.3)(typescript@5.6.2)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6))
       vite-plugin-pwa:
         specifier: ^0.20.1
         version: 0.20.5(@vite-pwa/assets-generator@0.2.6)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6))(workbox-build@7.1.1(@types/babel__core@7.20.5))(workbox-window@7.1.0)
@@ -6304,8 +6304,8 @@ packages:
     engines: {node: '>=12.20'}
     hasBin: true
 
-  typescript@5.5.4:
-    resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
+  typescript@5.6.2:
+    resolution: {integrity: sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -9113,7 +9113,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@tanstack/start@1.56.5(@types/node@22.5.4)(better-sqlite3@11.2.1)(drizzle-orm@0.33.0(@types/better-sqlite3@7.6.11)(@types/react@18.3.5)(better-sqlite3@11.2.1)(react@18.3.1))(ioredis@5.4.1)(magicast@0.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6))':
+  '@tanstack/start@1.56.5(@types/node@22.5.4)(better-sqlite3@11.2.1)(drizzle-orm@0.33.0(@types/better-sqlite3@7.6.11)(@types/react@18.3.5)(better-sqlite3@11.2.1)(react@18.3.1))(ioredis@5.4.1)(magicast@0.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.6)(typescript@5.6.2)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6))':
     dependencies:
       '@tanstack/react-cross-context': 1.51.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tanstack/react-router': 1.56.5(@tanstack/router-generator@1.56.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -9132,7 +9132,7 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       tiny-invariant: 1.3.3
       vinxi: 0.4.2(@types/node@22.5.4)(better-sqlite3@11.2.1)(drizzle-orm@0.33.0(@types/better-sqlite3@7.6.11)(@types/react@18.3.5)(better-sqlite3@11.2.1)(react@18.3.1))(ioredis@5.4.1)(magicast@0.3.5)(terser@5.31.6)
-      vite-tsconfig-paths: 5.0.1(typescript@5.5.4)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6))
+      vite-tsconfig-paths: 5.0.1(typescript@5.6.2)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6))
       zod: 3.23.8
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -13638,9 +13638,9 @@ snapshots:
 
   ts-pattern@5.3.1: {}
 
-  tsconfck@3.1.3(typescript@5.5.4):
+  tsconfck@3.1.3(typescript@5.6.2):
     optionalDependencies:
-      typescript: 5.5.4
+      typescript: 5.6.2
 
   tslib@2.7.0: {}
 
@@ -13703,7 +13703,7 @@ snapshots:
 
   typescript@5.0.4: {}
 
-  typescript@5.5.4: {}
+  typescript@5.6.2: {}
 
   ufo@1.5.4: {}
 
@@ -14101,7 +14101,7 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-checker@0.7.2(@biomejs/biome@1.8.3)(typescript@5.5.4)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6)):
+  vite-plugin-checker@0.7.2(@biomejs/biome@1.8.3)(typescript@5.6.2)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6)):
     dependencies:
       '@babel/code-frame': 7.24.7
       ansi-escapes: 4.3.2
@@ -14120,7 +14120,7 @@ snapshots:
       vscode-uri: 3.0.8
     optionalDependencies:
       '@biomejs/biome': 1.8.3
-      typescript: 5.5.4
+      typescript: 5.6.2
 
   vite-plugin-inspect@0.7.42(rollup@4.21.2)(vite@4.5.0(@types/node@22.5.4)(terser@5.31.6)):
     dependencies:
@@ -14163,11 +14163,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vite-tsconfig-paths@5.0.1(typescript@5.5.4)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6)):
+  vite-tsconfig-paths@5.0.1(typescript@5.6.2)(vite@5.4.3(@types/node@22.5.4)(terser@5.31.6)):
     dependencies:
       debug: 4.3.7
       globrex: 0.1.2
-      tsconfck: 3.1.3(typescript@5.5.4)
+      tsconfck: 3.1.3(typescript@5.6.2)
     optionalDependencies:
       vite: 5.4.3(@types/node@22.5.4)(terser@5.31.6)
     transitivePeerDependencies:
