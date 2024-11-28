@@ -24,7 +24,7 @@
 		"@apollo/client": "^3.11.4",
 		"@fastify/cookie": "^9.3.1",
 		"@fastify/oauth2": "7.9.0",
-		"@fastify/static": "^7.0.4",
+		"@fastify/static": "^8.0.0",
 		"@fastify/websocket": "10.0.1",
 		"@heroicons/react": "^2.1.5",
 		"@hocuspocus/extension-database": "^2.13.5",
